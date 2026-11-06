@@ -1,0 +1,478 @@
+<table class="evidence-table" id="table-ThemePairwiseLosses" aria-label="Forecast Preservation and Revision Losses by Theme">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="colgroup" colspan="3">ResNet</th>
+      <th scope="colgroup" colspan="3">NN</th>
+    </tr>
+    <tr>
+      <th scope="col">Theme</th>
+      <th scope="col">\(\Delta P_t\)</th>
+      <th scope="col">\(\Delta C_{t+1} / \%\)</th>
+      <th scope="col">\(\Delta V_{t+1} / \mathrm{bps}\)</th>
+      <th scope="col">\(\Delta P_t\)</th>
+      <th scope="col">\(\Delta C_{t+1} / \%\)</th>
+      <th scope="col">\(\Delta V_{t+1} / \mathrm{bps}\)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Accruals</th>
+      <td>
+        &#x2212;0.001
+        <sup>***</sup>
+      </td>
+      <td>0.02</td>
+      <td>0.05</td>
+      <td>&#x2212;0.001</td>
+      <td>0.11</td>
+      <td>0.01</td>
+    </tr>
+    <tr>
+      <th scope="row">Debt Issuance</th>
+      <td>0.000</td>
+      <td>0.04</td>
+      <td>0.02</td>
+      <td>0.001</td>
+      <td>&#x2212;0.01</td>
+      <td>0.11</td>
+    </tr>
+    <tr>
+      <th scope="row">Investment</th>
+      <td>
+        &#x2212;0.001
+        <sup>*</sup>
+      </td>
+      <td>0.01</td>
+      <td>&#x2212;0.23</td>
+      <td>&#x2212;0.001</td>
+      <td>&#x2212;0.16</td>
+      <td>0.07</td>
+    </tr>
+    <tr>
+      <th scope="row">Low Leverage</th>
+      <td>
+        &#x2212;0.003
+        <sup>***</sup>
+      </td>
+      <td>
+        0.49
+        <sup>***</sup>
+      </td>
+      <td>0.40</td>
+      <td>
+        &#x2212;0.011
+        <sup>***</sup>
+      </td>
+      <td>0.05</td>
+      <td>0.57</td>
+    </tr>
+    <tr>
+      <th scope="row">Low Risk</th>
+      <td>
+        0.002
+        <sup>**</sup>
+      </td>
+      <td>&#x2212;0.29</td>
+      <td>&#x2212;0.65</td>
+      <td>&#x2212;0.001</td>
+      <td>&#x2212;0.53</td>
+      <td>0.54</td>
+    </tr>
+    <tr>
+      <th scope="row">Momentum</th>
+      <td>
+        0.003
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;0.36
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;0.32</td>
+      <td>0.004</td>
+      <td>0.22</td>
+      <td>
+        &#x2212;2.83
+        <sup>**</sup>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Profit Growth</th>
+      <td>
+        0.001
+        <sup>*</sup>
+      </td>
+      <td>&#x2212;0.01</td>
+      <td>&#x2212;0.01</td>
+      <td>
+        0.002
+        <sup>*</sup>
+      </td>
+      <td>0.14</td>
+      <td>0.51</td>
+    </tr>
+    <tr>
+      <th scope="row">Profitability</th>
+      <td>
+        &#x2212;0.003
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;0.05</td>
+      <td>0.02</td>
+      <td>
+        &#x2212;0.003
+        <sup>***</sup>
+      </td>
+      <td>
+        0.41
+        <sup>***</sup>
+      </td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <th scope="row">Quality</th>
+      <td>0.001</td>
+      <td>
+        &#x2212;0.31
+        <sup>**</sup>
+      </td>
+      <td>&#x2212;0.14</td>
+      <td>&#x2212;0.002</td>
+      <td>0.19</td>
+      <td>0.70</td>
+    </tr>
+    <tr>
+      <th scope="row">Seasonality</th>
+      <td>0.000</td>
+      <td>&#x2212;0.05</td>
+      <td>&#x2212;0.02</td>
+      <td>&#x2212;0.001</td>
+      <td>
+        &#x2212;0.17
+        <sup>**</sup>
+      </td>
+      <td>0.02</td>
+    </tr>
+    <tr>
+      <th scope="row">Short-Term Reversal</th>
+      <td>0.001</td>
+      <td>0.08</td>
+      <td>
+        0.38
+        <sup>*</sup>
+      </td>
+      <td>0.001</td>
+      <td>&#x2212;0.02</td>
+      <td>
+        &#x2212;1.59
+        <sup>*</sup>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Size</th>
+      <td>&#x2212;0.001</td>
+      <td>0.22</td>
+      <td>&#x2212;0.15</td>
+      <td>0.002</td>
+      <td>&#x2212;0.10</td>
+      <td>
+        &#x2212;7.87
+        <sup>***</sup>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Value</th>
+      <td>0.001</td>
+      <td>&#x2212;0.11</td>
+      <td>&#x2212;0.17</td>
+      <td>&#x2212;0.001</td>
+      <td>
+        &#x2212;0.98
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;0.29</td>
+    </tr>
+    <tr>
+      <th scope="col"></th>
+      <th scope="colgroup" colspan="3">ResNet+</th>
+      <th scope="colgroup" colspan="3">NN+</th>
+    </tr>
+    <tr>
+      <th scope="col">Theme</th>
+      <th scope="col">\(\Delta P_t\)</th>
+      <th scope="col">\(\Delta C_{t+1} / \%\)</th>
+      <th scope="col">\(\Delta V_{t+1} / \mathrm{bps}\)</th>
+      <th scope="col">\(\Delta P_t\)</th>
+      <th scope="col">\(\Delta C_{t+1} / \%\)</th>
+      <th scope="col">\(\Delta V_{t+1} / \mathrm{bps}\)</th>
+    </tr>
+    <tr>
+      <th scope="row">Accruals</th>
+      <td>
+        0.001
+        <sup>***</sup>
+      </td>
+      <td>0.00</td>
+      <td>&#x2212;0.12</td>
+      <td>
+        0.001
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;0.08
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;0.13</td>
+    </tr>
+    <tr>
+      <th scope="row">Debt Issuance</th>
+      <td>
+        0.005
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;0.79
+        <sup>***</sup>
+      </td>
+      <td>0.28</td>
+      <td>
+        0.003
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;0.10
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;0.28</td>
+    </tr>
+    <tr>
+      <th scope="row">Investment</th>
+      <td>0.001</td>
+      <td>
+        &#x2212;1.33
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;1.67</td>
+      <td>
+        0.004
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;0.40
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;0.98</td>
+    </tr>
+    <tr>
+      <th scope="row">Low Leverage</th>
+      <td>
+        &#x2212;0.007
+        <sup>***</sup>
+      </td>
+      <td>
+        0.44
+        <sup>***</sup>
+      </td>
+      <td>
+        1.83
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;0.003
+        <sup>***</sup>
+      </td>
+      <td>
+        0.50
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;1.90</td>
+    </tr>
+    <tr>
+      <th scope="row">Low Risk</th>
+      <td>
+        0.007
+        <sup>***</sup>
+      </td>
+      <td>0.32</td>
+      <td>0.26</td>
+      <td>
+        0.009
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;1.45
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;6.58
+        <sup>***</sup>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Momentum</th>
+      <td>
+        0.022
+        <sup>***</sup>
+      </td>
+      <td>0.10</td>
+      <td>1.68</td>
+      <td>&#x2212;0.001</td>
+      <td>
+        &#x2212;0.32
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;3.34
+        <sup>***</sup>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Profit Growth</th>
+      <td>
+        0.003
+        <sup>***</sup>
+      </td>
+      <td>
+        1.48
+        <sup>***</sup>
+      </td>
+      <td>0.71</td>
+      <td>
+        0.001
+        <sup>***</sup>
+      </td>
+      <td>
+        0.13
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;0.43</td>
+    </tr>
+    <tr>
+      <th scope="row">Profitability</th>
+      <td>
+        0.003
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;0.42
+        <sup>***</sup>
+      </td>
+      <td>1.17</td>
+      <td>0.000</td>
+      <td>
+        0.10
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;0.22</td>
+    </tr>
+    <tr>
+      <th scope="row">Quality</th>
+      <td>
+        0.008
+        <sup>***</sup>
+      </td>
+      <td>
+        1.67
+        <sup>***</sup>
+      </td>
+      <td>2.05</td>
+      <td>
+        0.002
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;0.58
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;2.32
+        <sup>***</sup>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Seasonality</th>
+      <td>
+        0.003
+        <sup>***</sup>
+      </td>
+      <td>0.16</td>
+      <td>&#x2212;0.66</td>
+      <td>
+        0.001
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;0.04</td>
+      <td>&#x2212;0.80</td>
+    </tr>
+    <tr>
+      <th scope="row">Short-Term Reversal</th>
+      <td>
+        0.012
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;0.46
+        <sup>***</sup>
+      </td>
+      <td>0.82</td>
+      <td>
+        0.004
+        <sup>***</sup>
+      </td>
+      <td>
+        0.30
+        <sup>*</sup>
+      </td>
+      <td>
+        &#x2212;3.23
+        <sup>*</sup>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Size</th>
+      <td>
+        &#x2212;0.005
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;0.05</td>
+      <td>
+        6.11
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;0.008
+        <sup>***</sup>
+      </td>
+      <td>
+        1.63
+        <sup>***</sup>
+      </td>
+      <td>&#x2212;4.32</td>
+    </tr>
+    <tr>
+      <th scope="row">Value</th>
+      <td>
+        0.017
+        <sup>***</sup>
+      </td>
+      <td>
+        1.96
+        <sup>***</sup>
+      </td>
+      <td>0.30</td>
+      <td>
+        0.003
+        <sup>***</sup>
+      </td>
+      <td>
+        &#x2212;0.30
+        <sup>*</sup>
+      </td>
+      <td>
+        &#x2212;5.76
+        <sup>***</sup>
+      </td>
+    </tr>
+  </tbody>
+</table>

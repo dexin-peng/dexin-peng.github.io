@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="research-animation ranking-animation" width="960" height="436" viewBox="0 0 960 436" role="img" aria-labelledby="svg-ranking-animation--ranking-animation-title" id="svg-ranking-animation" data-svg-controls="1">
+<style data-svg-controls="1">#svg-ranking-animation .svg-label{transform:scale(var(--font-scale,1));transform-box:fill-box;transform-origin:center;}</style><title id="svg-ranking-animation--ranking-animation-title">Preservation and Refinement</title>
+<style>#svg-ranking-animation{ color: var(--standard-characters, #203448); font-family: "CMU Serif", "Times New Roman", Times, serif; }
+#svg-ranking-animation text{ fill: currentColor; }
+#svg-ranking-animation .blue{ color: var(--diagram-blue, #2a63a4); }
+#svg-ranking-animation .green{ color: var(--diagram-green, #148777); }
+#svg-ranking-animation .orange{ color: var(--diagram-orange, #c9712f); }
+#svg-ranking-animation .muted{ color: var(--diagram-muted, #657485); }
+#svg-ranking-animation .axis{ stroke: var(--line, #dce3ea); stroke-width: 1; }
+#svg-ranking-animation .flow{ fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: square; stroke-linejoin: miter; }
+#svg-ranking-animation .card{ fill: none; stroke: currentColor; stroke-width: 1.2; }
+#svg-ranking-animation .frame{ fill: none; stroke: var(--line, #dce3ea); stroke-width: 1.4; }
+#svg-ranking-animation .signal{ fill: currentColor; stroke: none; }
+#svg-ranking-animation,#svg-ranking-animation text,#svg-ranking-animation path,#svg-ranking-animation rect,#svg-ranking-animation line,#svg-ranking-animation g{
+  transition: color var(--theme-transition-duration, .382s) ease,
+              fill var(--theme-transition-duration, .382s) ease,
+              stroke var(--theme-transition-duration, .382s) ease;
+}
+#svg-ranking-animation .neutral{
+  fill: var(--standard-characters, #203448);
+  transition: fill var(--theme-transition-duration, .382s) ease;
+}
+#svg-ranking-animation .animation-static{ display: none; }
+@media (prefers-reduced-motion: reduce){
+#svg-ranking-animation .animation-motion{ display: none; }
+#svg-ranking-animation .animation-static{ display: inline; }
+}</style>
+<g class="svg-label" data-svg-label-kind="native"><text x="161" y="31" text-anchor="middle" font-size="24" font-weight="400" class="blue">Shallow Forecast</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="465" y="31" text-anchor="middle" font-size="24" font-weight="400" class="green">Deeper Forecast</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="790" y="31" text-anchor="middle" font-size="24" font-weight="400" class="neutral">Realized Returns</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="161" y="60" text-anchor="middle" font-size="20" font-weight="400" class="blue">T</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="465" y="60" text-anchor="middle" font-size="20" font-weight="400" class="green">T</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="790" y="60" text-anchor="middle" font-size="20" font-weight="400" class="neutral">T+1</text>
+</g><line x1="630" y1="17" x2="630" y2="302" class="axis" />
+<g class="blue"><rect class="card" x="74" y="89" width="174" height="43" /><g class="svg-label" data-svg-label-kind="native"><text x="161.0" y="118" text-anchor="middle" font-size="24" font-weight="400">AAPL</text></g></g>
+<g class="orange"><rect class="card" x="74" y="143" width="174" height="43" /><g class="svg-label" data-svg-label-kind="native"><text x="161.0" y="172" text-anchor="middle" font-size="24" font-weight="400">MSFT</text></g></g>
+<g class="green"><rect class="card" x="74" y="197" width="174" height="43" /><g class="svg-label" data-svg-label-kind="native"><text x="161.0" y="226" text-anchor="middle" font-size="24" font-weight="400">NVDA</text></g></g>
+<g class="muted"><rect class="card" x="74" y="251" width="174" height="43" /><g class="svg-label" data-svg-label-kind="native"><text x="161.0" y="280" text-anchor="middle" font-size="24" font-weight="400">AMZN</text></g></g>
+<g class="animation-motion">
+<g transform="translate(-304 0)" opacity="0"><g class="blue"><rect class="card" x="378" y="89" width="174" height="43" /><g class="svg-label" data-svg-label-kind="native"><text x="465.0" y="118" text-anchor="middle" font-size="24" font-weight="400">AAPL</text></g></g>
+<animate attributeName="opacity" dur="6.18s" repeatCount="indefinite" values="0;1;1" keyTimes="0;.0333333333;1" calcMode="discrete" />
+<animateTransform attributeName="transform" type="translate" dur="6.18s" repeatCount="indefinite" values="-304 0;-304 0;0 0;0 0;0 0;0 0;0 0;0 0" keyTimes="0;.0333333333;.1666666667;.20;.2583333333;.3583333333;.4166666667;1" calcMode="spline" keySplines="0 0 1 1;.42 0 .58 1;0 0 1 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1;0 0 1 1" />
+</g>
+<g transform="translate(-304 0)" opacity="0"><g class="orange"><rect class="card" x="378" y="143" width="174" height="43" /><g class="svg-label" data-svg-label-kind="native"><text x="465.0" y="172" text-anchor="middle" font-size="24" font-weight="400">MSFT</text></g></g>
+<animate attributeName="opacity" dur="6.18s" repeatCount="indefinite" values="0;1;1" keyTimes="0;.0333333333;1" calcMode="discrete" />
+<animateTransform attributeName="transform" type="translate" dur="6.18s" repeatCount="indefinite" values="-304 0;-304 0;0 0;0 0;-92 0;-92 54;0 54;0 54" keyTimes="0;.0333333333;.1666666667;.20;.2583333333;.3583333333;.4166666667;1" calcMode="spline" keySplines="0 0 1 1;.42 0 .58 1;0 0 1 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1;0 0 1 1" />
+</g>
+<g transform="translate(-304 0)" opacity="0"><g class="green"><rect class="card" x="378" y="197" width="174" height="43" /><g class="svg-label" data-svg-label-kind="native"><text x="465.0" y="226" text-anchor="middle" font-size="24" font-weight="400">NVDA</text></g></g>
+<animate attributeName="opacity" dur="6.18s" repeatCount="indefinite" values="0;1;1" keyTimes="0;.0333333333;1" calcMode="discrete" />
+<animateTransform attributeName="transform" type="translate" dur="6.18s" repeatCount="indefinite" values="-304 0;-304 0;0 0;0 0;92 0;92 -54;0 -54;0 -54" keyTimes="0;.0333333333;.1666666667;.20;.2583333333;.3583333333;.4166666667;1" calcMode="spline" keySplines="0 0 1 1;.42 0 .58 1;0 0 1 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1;0 0 1 1" />
+</g>
+<g transform="translate(-304 0)" opacity="0"><g class="muted"><rect class="card" x="378" y="251" width="174" height="43" /><g class="svg-label" data-svg-label-kind="native"><text x="465.0" y="280" text-anchor="middle" font-size="24" font-weight="400">AMZN</text></g></g>
+<animate attributeName="opacity" dur="6.18s" repeatCount="indefinite" values="0;1;1" keyTimes="0;.0333333333;1" calcMode="discrete" />
+<animateTransform attributeName="transform" type="translate" dur="6.18s" repeatCount="indefinite" values="-304 0;-304 0;0 0;0 0;0 0;0 0;0 0;0 0" keyTimes="0;.0333333333;.1666666667;.20;.2583333333;.3583333333;.4166666667;1" calcMode="spline" keySplines="0 0 1 1;.42 0 .58 1;0 0 1 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1;0 0 1 1" />
+</g>
+</g>
+<g class="animation-static">
+<g class="blue"><rect class="card" x="378" y="89" width="174" height="43" /><g class="svg-label" data-svg-label-kind="native"><text x="465.0" y="118" text-anchor="middle" font-size="24" font-weight="400">AAPL</text></g></g>
+<g class="orange"><rect class="card" x="378" y="197" width="174" height="43" /><g class="svg-label" data-svg-label-kind="native"><text x="465.0" y="226" text-anchor="middle" font-size="24" font-weight="400">MSFT</text></g></g>
+<g class="green"><rect class="card" x="378" y="143" width="174" height="43" /><g class="svg-label" data-svg-label-kind="native"><text x="465.0" y="172" text-anchor="middle" font-size="24" font-weight="400">NVDA</text></g></g>
+<g class="muted"><rect class="card" x="378" y="251" width="174" height="43" /><g class="svg-label" data-svg-label-kind="native"><text x="465.0" y="280" text-anchor="middle" font-size="24" font-weight="400">AMZN</text></g></g>
+</g>
+<g class="blue"><rect class="card" x="671" y="89" width="238" height="43" />
+<g class="svg-label" data-svg-label-kind="native"><text x="693" y="118" text-anchor="start" font-size="24" font-weight="400">AAPL</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="887" y="118" text-anchor="end" font-size="24" font-weight="400">+3%</text>
+</g></g>
+<g class="green"><rect class="card" x="671" y="143" width="238" height="43" />
+<g class="svg-label" data-svg-label-kind="native"><text x="693" y="172" text-anchor="start" font-size="24" font-weight="400">NVDA</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="887" y="172" text-anchor="end" font-size="24" font-weight="400">+2%</text>
+</g></g>
+<g class="muted"><rect class="card" x="671" y="197" width="238" height="43" />
+<g class="svg-label" data-svg-label-kind="native"><text x="693" y="226" text-anchor="start" font-size="24" font-weight="400">AMZN</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="887" y="226" text-anchor="end" font-size="24" font-weight="400">0%</text>
+</g></g>
+<g class="orange"><rect class="card" x="671" y="251" width="238" height="43" />
+<g class="svg-label" data-svg-label-kind="native"><text x="693" y="280" text-anchor="start" font-size="24" font-weight="400">MSFT</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="887" y="280" text-anchor="end" font-size="24" font-weight="400">&#x2212;1%</text>
+</g></g>
+<g class="muted"><rect class="card" x="24" y="330" width="210" height="80" />
+<g class="svg-label" data-svg-label-kind="native"><text x="129" y="362" text-anchor="middle" font-size="27" font-weight="400">n = 6</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="129" y="393" text-anchor="middle" font-size="17" font-weight="400">Stock Pairs</text>
+</g></g>
+<g class="blue"><rect class="card" x="258" y="330" width="210" height="80" />
+<g class="svg-label" data-svg-label-kind="native"><text x="363" y="362" text-anchor="middle" font-size="27" xml:space="preserve"><tspan>P = </tspan><tspan class="animation-motion" opacity="0">5/6<animate attributeName="opacity" dur="6.18s" repeatCount="indefinite" values="0;0;1;1" keyTimes="0;.4166666667;.4666666667;1" calcMode="spline" keySplines="0 0 1 1;.42 0 .58 1;0 0 1 1" /></tspan><tspan class="animation-static">5/6</tspan></text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="363" y="393" text-anchor="middle" font-size="17" font-weight="400">Preservation Score</text>
+</g></g>
+<g class="green"><rect class="card" x="492" y="330" width="210" height="80" />
+<g class="svg-label" data-svg-label-kind="native"><text x="597" y="362" text-anchor="middle" font-size="27" xml:space="preserve"><tspan>C = </tspan><tspan class="animation-motion" opacity="0">+100%<animate attributeName="opacity" dur="6.18s" repeatCount="indefinite" values="0;0;1;1" keyTimes="0;.4166666667;.4666666667;1" calcMode="spline" keySplines="0 0 1 1;.42 0 .58 1;0 0 1 1" /></tspan><tspan class="animation-static">+100%</tspan></text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="597" y="393" text-anchor="middle" font-size="17" font-weight="400">Revision Accuracy</text>
+</g></g>
+<g class="orange"><rect class="card" x="726" y="330" width="210" height="80" />
+<g class="svg-label" data-svg-label-kind="native"><text x="831" y="362" text-anchor="middle" font-size="27" xml:space="preserve"><tspan>V = </tspan><tspan class="animation-motion" opacity="0">50 bps<animate attributeName="opacity" dur="6.18s" repeatCount="indefinite" values="0;0;1;1" keyTimes="0;.4166666667;.4666666667;1" calcMode="spline" keySplines="0 0 1 1;.42 0 .58 1;0 0 1 1" /></tspan><tspan class="animation-static">50 bps</tspan></text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="831" y="393" text-anchor="middle" font-size="17" font-weight="400">Revision Economic Value</text>
+</g></g>
+</svg>

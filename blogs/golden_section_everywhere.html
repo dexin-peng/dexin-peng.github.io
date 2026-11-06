@@ -3,27 +3,28 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <script src="/js/color.js"></script>
     <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/reading-navigation.css">
 </head>
 
-<body>
+<body id="top">
   <div class="message" hidden></div>
-  <div class="page">
-      <div class="content-header">
-        <button class="icon" onclick="toggle_theme()">
-          <div class='icon-wrapper'>
-            <div class='icon-inside'></div>
-          </div>
-        </button>
-      </div>
-
-<div class="blogs">
+<!-- reading-navigation:start -->
+<input class="bar-state" id="reading-bar-expanded" type="checkbox" checked aria-label="Show navigation bar" aria-controls="reading-bar">
+<header class="reading-bar" id="reading-bar">
+  <nav class="reading-bar-inner">
     <a class="blog" href="/index.html">Home Page</a>
-</div class="blogs">
-
+    <label class="blog bar-hide" for="reading-bar-expanded">Hide</label>
+    <button class="icon" onclick="toggle_theme()" aria-label="Toggle light and dark theme"><div class="icon-wrapper"><div class="icon-inside"></div></div></button>
+    <button class="reading-position" type="button" aria-label="Back to top" title="Back to top" data-return="false"><svg class="reading-position-glyph" width="36" height="36" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4.5h17"/><path class="reading-chevron" d="m6 18 6-6 6 6"/></svg></button>
+  </nav>
+</header>
+<label class="blog bar-expand" for="reading-bar-expanded">Expand</label>
+<!-- reading-navigation:end -->
+  <div class="page reading-article">
 
 <p>Golden ratio is the design principle which resides in this website everywhere.</p> 
 
-<code>(1 + √5) / 2 ≈ 0.618
+<code>(1 + &#x221A;5) / 2 &#x2248; 0.618
 
 1 - 0.618 = 0.382
 </code>
@@ -49,6 +50,11 @@
 <input class="input" placeholder="6.18px, change me!">
 <button class="button" onclick="change_radius()" message="Set">Code Block Radius</button>
 
+<footer class="copyright">
+  <p class="copyright-text">&#xA9; 2020-2026 by Dexin PENG. All rights reserved.</p>
+  <p class="copyright-text"></p>
+</footer>
+
 </div>
 </body>
 
@@ -60,3 +66,4 @@
 <script src="/js/message.js"></script>
 <script src="/js/go_back_page.js"></script>
 <script src="/js/gold_section.js"></script>
+<script src="/js/reading-navigation.js"></script>

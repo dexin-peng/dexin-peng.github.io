@@ -1,4 +1,12 @@
-
+/* Complete, self-hosted fonts; licenses are beside each family's WOFF2 files. */
+@font-face { font-family: 'TeX Gyre Termes'; src: url('/asset/fonts/tex-gyre-termes/texgyretermes-regular.woff2') format('woff2'); font-style: normal; font-weight: 400; font-display: swap; }
+@font-face { font-family: 'TeX Gyre Termes'; src: url('/asset/fonts/tex-gyre-termes/texgyretermes-italic.woff2') format('woff2'); font-style: italic; font-weight: 400; font-display: swap; }
+@font-face { font-family: 'TeX Gyre Termes'; src: url('/asset/fonts/tex-gyre-termes/texgyretermes-bold.woff2') format('woff2'); font-style: normal; font-weight: 700; font-display: swap; }
+@font-face { font-family: 'TeX Gyre Termes'; src: url('/asset/fonts/tex-gyre-termes/texgyretermes-bolditalic.woff2') format('woff2'); font-style: italic; font-weight: 700; font-display: swap; }
+@font-face { font-family: 'CMU Serif'; src: url('/asset/fonts/cmu-serif/cmunrm.woff2') format('woff2'); font-style: normal; font-weight: 400; font-display: swap; }
+@font-face { font-family: 'CMU Serif'; src: url('/asset/fonts/cmu-serif/cmunti.woff2') format('woff2'); font-style: italic; font-weight: 400; font-display: swap; }
+@font-face { font-family: 'CMU Serif'; src: url('/asset/fonts/cmu-serif/cmunbx.woff2') format('woff2'); font-style: normal; font-weight: 700; font-display: swap; }
+@font-face { font-family: 'CMU Serif'; src: url('/asset/fonts/cmu-serif/cmunbi.woff2') format('woff2'); font-style: italic; font-weight: 700; font-display: swap; }
 
 .page {
   font-weight: normal;
@@ -14,6 +22,7 @@
 }
 
 :root {
+  --theme-transition-duration: 0.382s;
   --sun: #cbd5e0;
   --moon: #2d3748;
   --background: #0d1015;
@@ -48,8 +57,9 @@
 }
 
 body {
+  font-family: 'TeX Gyre Termes', 'Times New Roman', Times, serif;
   background-color: var(--background);
-  transition: 0.382s;
+  transition: var(--theme-transition-duration);
   margin: 0;
 }
 
@@ -314,7 +324,11 @@ p{
   padding-left: 8px;
   padding-right: 8px;
   border: 1px solid;
+  color: #fff;
+  background: #1a202c;
 }
+
+[Theme='light'] .message { color: #000; background: #fff; }
 
 
 inline_code {
@@ -592,6 +606,10 @@ input{
 }
 
 .blog-item {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: clamp(12px, 3vw, 32px);
+  align-items: baseline;
   opacity: 1;
   transition: 0.382s;
   margin-bottom: 12px;
@@ -601,7 +619,15 @@ input{
   display: none;
 }
 
+.blog-date {
+  white-space: nowrap;
+  font-size: large;
+  font-variant-numeric: tabular-nums;
+  color: var(--small-characters);
+}
+
 .blog-content {
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;

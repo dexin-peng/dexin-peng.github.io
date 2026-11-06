@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog of Paper "Residual Learning in Empirical Asset Pricing"</title>
+    <meta name="description" content="ResNet asset pricing: an illustrated introduction to Residual Learning in Empirical Asset Pricing, covering neural networks, stock return forecasting, and portfolio rankings.">
+    <link rel="canonical" href="https://dexin-peng.github.io/blogs/resnet-asset-pricing.html">
+    <script src="/js/color.js"></script>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/asset/katex/katex.min.css">
+    <link rel="stylesheet" href="/css/residual-learning.css">
+    <link rel="stylesheet" href="/css/reading-navigation.css">
+  </head>
+  <body id="top">
+    <!-- reading-navigation:start -->
+    <input class="bar-state" id="reading-bar-expanded" type="checkbox" checked aria-label="Show navigation bar" aria-controls="reading-bar">
+    <header class="reading-bar" id="reading-bar">
+      <nav class="reading-bar-inner">
+        <a class="blog" href="/index.html">Home Page</a>
+        <label class="blog bar-hide" for="reading-bar-expanded">Hide</label>
+        <button class="icon" onclick="toggle_theme()" aria-label="Toggle light and dark theme"><div class="icon-wrapper"><div class="icon-inside"></div></div></button>
+        <button class="reading-position" type="button" aria-label="Back to top" title="Back to top" data-return="false"><svg class="reading-position-glyph" width="36" height="36" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 4.5h17"/><path class="reading-chevron" d="m6 18 6-6 6 6"/></svg></button>
+      </nav>
+
+    </header>
+    <label class="blog bar-expand" for="reading-bar-expanded">Expand</label>
+    <!-- reading-navigation:end -->
+    <aside class="contents-sidebar" data-open="false">
+      <button class="contents-toggle" type="button" aria-controls="blog-contents" aria-expanded="false" aria-label="Show Table of Contents">
+        <svg class="reading-position-glyph" width="36" height="36" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4.5 3.5v17"/>
+          <path class="contents-chevron" d="m18 6-6 6 6 6"/>
+        </svg>
+      </button>
+      <nav class="contents" id="blog-contents" aria-label="Table of Contents" aria-hidden="true" inert>
+        <ol></ol>
+      </nav>
+    </aside>
+    <main class="page research-blog reading-article">
+      <!-- Size controls: --width: 80% uses 80% of its containing column; --font-scale: 1.1 enlarges lettering by 10%. -->
+      <h1>Blog of Paper "Residual Learning in Empirical Asset Pricing"</h1>
+      <p>See recent releases of OpenAI models: Luna, Terra, Sol, and Astra. The larger the model size, the better its performance. The <span class="footnote-anchor">"scaling law"<sup class="footnote-ref"><button id="fnref-1" type="button" data-footnote="fn-1" aria-label="Footnote 1">1</button></sup></span> applies.
+      </p>
+      <p>
+        Will return forecasts be more accurate with larger models? How can we enlarge empirical asset pricing models?
+      </p>
+        <div class="history-table" style="--width: min(100%, 1200px); --font-scale: 1;">
+          <div class="history-head">
+            <span>Year</span>
+            <span>Empirical Supervised Machine Learning Model</span>
+            <span>Parameters</span>
+          </div>
+          <ol class="history">
+            <li><span class="history-year">1964</span><span>CAPM</span><span class="history-count">2</span></li>
+            <li><span class="history-year">1993</span><span>Fama-French three factor model</span><span class="history-count">4</span></li>
+            <li><span class="history-year">1997</span><span>Carhart four factor model</span><span class="history-count">5</span></li>
+            <li><span class="history-year">2013</span><span>Barra USE4</span><span class="history-count">72</span></li>
+            <li><span class="history-year">2016</span><span>"Factor zoo" in one model</span><span class="history-count">316</span></li>
+            <li><span class="history-year">2020</span><span>Feedforward neural network</span><span class="history-count">5k&#x2013;6k</span></li>
+            <li class="ours"><span class="history-year">Ours</span><span>NN/ResNet grid</span><span class="history-count">5k&#x2013;25k</span><span>ResNet+/NN+
+            grid</span><span class="history-count">6k&#x2013;66k</span></li>
+          </ol>
+        </div>
+      <p>
+       Let's begin with the classic CAPM.
+      </p>
+      <section id="history">
+        <h2>Empirically, CAPM is a supervised machine learning model</h2>
+        <div class="parallel">
+          <p>Given in-sample explanatory variables \(X\) and the response variable \(y\), a supervised machine learning model learns a mapping from \(X\) to \(y\) by minimizing a loss function. The learned mapping can then be applied to out-of-sample \(X\) to obtain predictions \(\hat y\).
+        </p>
+        </div>
+
+        <p>For CAPM, theoretically, we have:</p>
+
+        <div class="equations" style="--width: 100%; --font-scale: 1;">E[R_i-R_f]=\beta_i E[R_m-R_f].</div>
+        <p>Let \(X_t=R_{m,t}-R_{f,t}\), and \(y_t=R_{i,t}-R_{f,t}\). Empirically, we have:</p>
+
+        <div class="equations" style="--width: 100%; --font-scale: 1;">y_t=\alpha_i+\beta_i X_t+\epsilon_{i,t}.</div>
+        <p>The two trainable parameters can be estimated by minimizing MSE:</p>
+
+        <div class="equations" style="--width: 100%; --font-scale: 1;">(\hat\alpha_i,\hat\beta_i)=\arg\min_{\alpha_i,\beta_i}\frac{1}{T}\sum_{t=1}^{T}(y_t-\alpha_i-\beta_i
+        X_t)^2.</div>
+        <p>With out-of-sample data, we have:</p>
+
+        <div class="equations" style="--width: 100%; --font-scale: 1;">\hat y_{T}=\hat\alpha_i+\hat\beta_i X_{T}.</div>
+        <p>
+        So, empirically, CAPM is a supervised machine learning model. It's supervised because the model is trained with in-sample data; and the in-sample \(X\) is mapped to its corresponding in-sample \(y\). It's a machine learning model because the parameters are learned from data.
+        </p>
+        <p>
+        "Contemporaneous explanatory models" and "forecasting models" can both be supervised machine learning models.
+        </p>
+
+        <div class="model-equations" style="--width: 100%;">
+          <p class="model-equation" style="--font-scale: 1;">
+            <span class="footnote-anchor"><strong>Fama-French three factor model</strong><sup class="footnote-ref"><button id="fnref-2" type="button" data-footnote="fn-2" aria-label="Footnote 2">2</button></sup>:</span>
+            <span>\(y_t\)</span>
+            <span>\(=\alpha_i+\beta_{i,1}X_{1,t}+\beta_{i,2}X_{2,t}+\beta_{i,3}X_{3,t}+\epsilon_{i,t}\)</span>
+          </p>
+          <p class="model-equation" style="--font-scale: 1;">
+            <span class="footnote-anchor"><strong>Carhart four factor model</strong><sup class="footnote-ref"><button id="fnref-3" type="button" data-footnote="fn-3" aria-label="Footnote 3">3</button></sup>:</span>
+            <span>\(y_t\)</span>
+            <span>\(=\alpha_i+\beta_{i,1}X_{1,t}+\beta_{i,2}X_{2,t}+\beta_{i,3}X_{3,t}+\beta_{i,4}X_{4,t}+\epsilon_{i,t}\)</span>
+          </p>
+          <p class="model-equation" style="--font-scale: 1;">
+            <span class="footnote-anchor"><strong>Barra USE4</strong><sup class="footnote-ref"><button id="fnref-4" type="button" data-footnote="fn-4" aria-label="Footnote 4">4</button></sup>:</span>
+            <span>\(y_{i,t}\)</span>
+            <span>\(=\sum_{k=1}^{73}X_{i,k,t}f_{k,t}+\epsilon_{i,t}\)</span>
+          </p>
+          <p class="model-equation" style="--font-scale: 1;">
+            <span class="footnote-anchor"><strong>"Factor zoo" in one model</strong><sup class="footnote-ref"><button id="fnref-5" type="button" data-footnote="fn-5" aria-label="Footnote 5">5</button></sup>:</span>
+            <span>\(y_{i,t+1}\)</span>
+            <span>\(=\alpha+\sum_{k=1}^{K}\beta_k X_{i,k,t}+\epsilon_{i,t+1}\)</span>
+          </p>
+        </div>
+        <p>The above machine learning models are linear models, and it's easy to see that the number of trainable parameters increases as more features are introduced. <a href="#ref-gu2020EmpiricalAssetPricing">Gu et al. (2020)</a> increase the number of trainable parameters by introducing more complex mapping functions.</p>
+
+        <div class="model-equations" style="--width: 100%;">
+          <p class="model-equation" style="--font-scale: 1;">
+            <span class="footnote-anchor"><strong>Feedforward neural network</strong><sup class="footnote-ref"><button id="fnref-6" type="button" data-footnote="fn-6" aria-label="Footnote 6">6</button></sup>:</span>
+            <span>\(y_{i,t+1}\)</span>
+            <span>\(=f_\theta(X_{i,t})+\epsilon_{i,t+1}\)</span>
+          </p>
+        </div>
+        <p>However, they find that the performance of neural network models peaks at relatively shallow
+        depths, and simply adding more feedforward layers does not deliver correspondingly greater economic
+        value. They conclude that shallow learning outperforms deeper learning.</p>
+</section>
+
+        <section id="trends">
+          <h2>Trends in the empirical asset pricing field</h2>
+          
+        <p>From the development history of classic (empirical) asset pricing models, we can observe two trends:</p>
+        <ol class="article-list">
+          <li>Shifting from explanatory models to forecasting models.</li>
+          <li>Incorporating more trainable parameters into asset pricing models.</li>
+        </ol>
+        <p>If we look at the machine learning field, we can see that there are millions and even billions of parameters. Large models in the (empirical) asset pricing field are far behind.</p>
+
+        <div class="slide-figure" style="--width: min(100%, 831.8125px); --font-scale: 1; aspect-ratio: 634.73287 / 432;">
+
+          <div class="slide-image" data-include="/asset/residual-learning/parameter-scale.svg" role="img" aria-label="Asset pricing models"></div>
+
+          <div class="slide-image slide-image-dark" data-include="/asset/residual-learning/parameter-scale-dark.svg" aria-hidden="true"></div>
+
+        </div>
+        <p>If we want to apply the scaling law to the asset pricing field, how can we enlarge the model?</p>
+        <ol class="article-list">
+          <li>By introducing more features?</li>
+          <li>By introducing more complex mapping functions?</li>
+          <li>By introducing pretrained LLMs?</li>
+        </ol>
+        <p>The first way of introducing more features is doable but can only increase linearly. And the third way of introducing LLMs is not asset-pricing-native.</p>
+      </section>
+
+        <p>Recent uses of large models in asset pricing typically involve LLMs. These approaches
+        treat LLMs as given external tools that transform unstructured information into structured data. Another common approach is to fine-tune a pretrained LLM for financial (textual)
+        question answering. The LLMs are indeed large, but they are not native asset pricing models.</p>
+
+        <div class="routes" style="--width: 100%; --font-scale: 0.9;">
+          <div>
+            <strong>(Typically) With Large Language Models</strong>
+            <p>Unstructured Information<span>&#x2193;</span>LLMs<span>&#x2193;</span>Structured Data<span>&#x2193;</span>Asset Pricing Models<span>&#x2193;</span>Return
+            Forecasts etc.</p>
+
+          </div>
+          <div>
+            <strong>Native Large Asset Pricing Models</strong>
+            <p>Structured Data<span>&#x2193;</span>LAPMs (Large Asset Pricing Models)<span>&#x2193;</span>Return
+            Forecasts etc.</p>
+
+          </div>
+        </div>
+
+        <p>We describe native large asset pricing models (LAPMs) as models with a large number of trainable parameters that are trained directly for asset pricing tasks, such as forecasting future returns.</p>
+
+        <p>If we follow the second way, introducing more complex mapping functions can indeed introduce more trainable parameters exponentially. But according to <a href="#ref-gu2020EmpiricalAssetPricing">Gu et al. (2020)</a>, shallow models outperform deep models. Interestingly, similar conclusions were found in many machine learning papers (<a href="#ref-romero2015fitnets">Romero et al. (2015)</a>, <a href="#ref-he2015delving">He et al. (2015)</a>, <a href="#ref-srivastava2015training">Srivastava et al. (2015)</a>) before <a href="#ref-he2016deep">He et al. (2016a)</a>.
+      <p>Do shallow models really outperform deep models?</p>
+
+      <section id="identity">
+        <h2>An extra layer that changes nothing</h2>
+        <p>Theoretically, shallow models do not outperform deep models because of the identity transformation \(f(x)=x\).</p>
+        <p>Given a good shallow model \(g\), add one \(f(x)=x\) layer.</p>
+        <p>The new model is deeper but performs equally well.</p>
+        <p>So, <strong>"shallow is a special case of deep"</strong>, or at least the deeper model has higher model capacity than that of the shallow one. The added layer could learn something other than identity mapping.</p>
+        <p>Now the question is: how can we activate the extra model capacity of the deeper model?</p>
+      </section>
+
+
+      <section id="residual">
+        <h2>Residual Learning</h2>
+
+        <div class="parallel">
+          <p><a href="#ref-he2016deep">He et al. (2016a)</a> provide a residual block design in which shortcut
+          paths carry the current hidden representation forward and residual branches learn residual updates to
+          the hidden representation.
+        </p>
+        </div>
+
+        <div class="slide-figure" style="--width: min(100%, 618px); --font-scale: 1; aspect-ratio: 472 / 185;">
+
+          <div class="slide-image" data-include="/asset/residual-learning/residual-learning.svg" role="img" aria-label="From Feedforward Networks to Residual Neural Networks"></div>
+
+          <div class="slide-image slide-image-dark" data-include="/asset/residual-learning/residual-learning-dark.svg" aria-hidden="true"></div>
+
+        </div>
+
+        <p>Following the residual learning convention in He et al. (<a href="#ref-he2016deep">2016a</a>,
+        <a href="#ref-he2016identity">2016b</a>), we add residual blocks with shortcut paths to feedforward
+        asset pricing models. A residual block is a combination of a shortcut path and a residual branch, in
+        which the shortcut path keeps an earlier representation intact through an identity mapping and the
+        residual branch learns a residual update.</p>
+
+
+        <p>For return forecasting, the shortcut path carries the current pricing signal forward, while
+        the residual branch searches for residual updates to that pricing signal.</p>
+
+        <div class="equations" style="--width: 100%; --font-scale: 1;">h_0=\mathcal I(X),\qquad h_d=h_{d-1}+g_d(h_{d-1})</div>
+        <p>In a feedforward block, the learned transformation becomes the next representation. A residual block
+        supplies a second route, in which the shortcut path carries the input and the residual branch
+        contributes a residual update.</p>
+        <p>For any shallower specification in this idealized recursion with depth \(d_0&lt;D\), the deeper
+        function class can reproduce it by setting \(g_d(\cdot)\equiv 0\) for all \(d&gt;d_0\), so the shallow
+        specification is a subset of the deeper specifications, and is nested inside the idealized deeper
+        function class with residual learning.</p>
+
+        <p>We build an empirical sequence that begins with a shallow model, then add layers under residual and
+        feedforward rules, and examine whether these models retain, deteriorate, or improve upon the
+        out-of-sample performance of the shallow model.</p>
+
+      </section>
+
+      <section id="design">
+        <h2>Experiments design</h2>
+        <p>Two comparison sets are developed to evaluate the residual-learning framework across varying depths.
+        The first is the raw benchmark comparison set, which compares a feedforward neural network model (NN)
+        with the same model directly equipped with residual learning (ResNet). The second is the main comparison
+        set, which compares the asset-pricing-tailored feedforward neural network model (NN+) with the same
+        model directly equipped with residual learning (ResNet+). In each comparison set, we ensure that the
+        models are evaluated under the same conditions such as data, preprocessing, training protocol, and
+        portfolio evaluation methods to isolate the effect of residual learning.</p>
+
+        <div class="slide-figure" style="--width: min(80%, 665.4375px); --font-scale: 1; aspect-ratio: 580 / 267;">
+
+          <div class="slide-image" data-include="/asset/residual-learning/architecture.svg" role="img" aria-label="Simplified Building Blocks"></div>
+
+          <div class="slide-image slide-image-dark" data-include="/asset/residual-learning/architecture-dark.svg" aria-hidden="true"></div>
+
+        </div>
+        <p>However, our ResNet+ allows the hidden width to change while still being able to maintain the
+        residual learning structure by using projection paths.</p>
+
+        <p>To isolate the sole effect of residual learning from the combined effect of the tailored architecture
+        and residual learning, we remove the residual-learning components from ResNet+ and replace them with
+        tailored feedforward blocks to form its counterpart NN+, which is identical in overall structure to
+        ResNet+ except that it replaces residual blocks with feedforward blocks.</p>
+
+        <details class="fold" open>
+          <summary>Empirical Design</summary>
+          <div class="fold-content">
+            <div class="table-scroll" data-include="/asset/residual-learning/tables/empirical-design.html"></div>
+          </div>
+        </details>
+
+        <p>With expanding training windows, the model parameters are optimized using an initial training sample
+        containing predictor observations from January 1963 through December 1986 and their one-month-ahead
+        returns. The last response observation in the initial training sample is the realized return in January
+        1987. After the January 1987 returns are observed, model training is completed, and the model uses
+        forecast origin observations from January through December 1987 to forecast out-of-sample future returns
+        from February 1987 through January 1988.</p>
+
+        <figure class="animated-figure expanding-window-figure" data-include="/asset/residual-learning/expanding-window.svg" style="--width: min(100%, 800px); --font-scale: 1; aspect-ratio: 489.8 / 201.600781"></figure>
+
+        <p>Subsequent annual refits follow this expanding approach, yielding 443 forecast origins from January
+        1987 through November 2023 and realized returns from February 1987 through December 2023. The expanding
+        training window is designed to avoid forward-looking bias while preserving the mapping \(X_t \rightarrow
+        R_{t+1}\) throughout model training and out-of-sample forecasting.</p>
+
+        <p>On the last day of each month, eligible stocks are sorted into deciles by their out-of-sample
+        forecasts. The analysis mainly uses value-weighted decile portfolios, with stock weights proportional to
+        market capitalization.</p>
+
+      </section>
+
+      <section id="results">
+        <h2>Does additional depth help?</h2>
+        <p>We then calculate the Sharpe ratio for each width and depth specification and average these ratios
+        within each model family and depth group to produce the reported Sharpe ratios.</p>
+
+        <div class="result-grid" style="--width: min(90%, 748.625px);">
+          <figure class="result-panel" data-include="/asset/residual-learning/resnet-vs-nn.svg" style="--width: 100%; --font-scale: 1; aspect-ratio: 480 / 320"></figure>
+
+          <figure class="result-panel" data-include="/asset/residual-learning/resnet-plus-vs-nn-plus.svg" style="--width: 100%; --font-scale: 1; aspect-ratio: 480 / 320"></figure>
+
+        </div>
+        <details class="fold" open>
+          <summary>Long-Short Portfolio Performance by Depth Group and Model Family</summary>
+          <div class="fold-content">
+            <div class="table-scroll" data-include="/asset/residual-learning/tables/portfolio-performance.html"></div>
+          </div>
+        </details>
+
+        <p>The out-of-sample performance of ResNet remains nearly the same across all three groups, while NN
+        shows a monotonic decline in these performance metrics, indicating that directly adding the residual
+        learning provides protection against deterioration with depth.</p>
+
+        <p>The mean monthly long-short return and volatility of ResNet+ also change little across depths, but as
+        depth increases, the value-weighted Sharpe ratio increases monotonically and gradually from 1.92 in the
+        shallow group to 1.94 in the medium group, reaching 2.07 in the deep group. NN+ begins with a
+        value-weighted Sharpe ratio of 1.84 and then falls to 1.47 and 0.89 as the specifications move from
+        shallow through medium to deep. With the tailored architecture, the residual learning provides an
+        improvement in out-of-sample performance as network depth increases, while the performance of NN+
+        deteriorates as depth increases.</p>
+
+        <p>Long-only value-weighted portfolios across all ten forecast deciles show how realized performance
+        varies over the full ranking.</p>
+
+        <figure class="evidence-figure" style="--width: min(95%, 790.21875px); --font-scale: 1;">
+          <div class="slide-figure" style="aspect-ratio: 638.1667 / 276.0187;">
+            <div class="slide-image" data-include="/asset/residual-learning/decile-portfolios.svg" role="img" aria-label="Realized Returns, Volatility, and Sharpe Ratios across Deciles"></div>
+            <div class="slide-image slide-image-dark" data-include="/asset/residual-learning/decile-portfolios-dark.svg" aria-hidden="true"></div>
+          </div>
+        </figure>
+
+        <p>The return profiles in each subfigure are close in the middle deciles and separate toward the tails,
+        showing that the residual learning is more effective at distinguishing the most promising and the most
+        undesirable stocks.</p>
+
+        <p>The Sharpe ratios for all models also show a common rising trend across deciles, indicating that
+        every model is economically useful in ranking stocks. For stocks forecast to perform poorly in the low
+        deciles, the Sharpe ratios of the residual models are generally lower than those of the feedforward
+        models; for stocks forecast to perform promisingly in the high deciles, the Sharpe ratios of the
+        residual models are generally higher than those of the feedforward models.</p>
+
+      </section>
+
+      <section id="ranking">
+        <h2>Preserve and refine</h2>
+        <p>A deeper model may reproduce the ranking of the shallow model, discard it, or preserve most of the
+        ranking and revise the rest.</p>
+
+        <p>Let \(n_t\) be the total number of pairs and \(m_t\) be the number whose ordering changes. For each
+        changed pair \(k\), let \(c_{k,t+1}\) denote its pairwise revision score based on next month's realized
+        returns.</p>
+
+        <div class="equations" style="--width: 100%; --font-scale: 1;">\begin{aligned} P_t&amp;=1-\frac{m_t}{n_t}, &amp;
+        C_{t+1}&amp;=\frac{1}{m_t}\sum_{k=1}^{m_t}c_{k,t+1},\\ &amp;&amp;
+        V_{t+1}&amp;=\frac{1}{n_t}\sum_{k=1}^{m_t}c_{k,t+1}\left|R_{i_k,t+1}-R_{j_k,t+1}\right|,\end{aligned}</div>
+        <figure class="animated-figure ranking-figure" data-include="/asset/residual-learning/ranking-animation.svg" style="--width: min(85%, 650px); --font-scale: 1; aspect-ratio: 960 / 436"></figure>
+
+        <p>where the preservation score \(P_t\) measures the fraction of stock pairs whose forecast ordering is
+        unchanged from the corresponding minimum-depth shallow anchor forecast, ranging from \(0\) to \(1\),
+        with \(0\) indicating no preservation and \(1\) indicating complete preservation.</p>
+
+        <p>\(c_{k,t+1}\) is assigned \(+1\) if the changed deeper model's ordering agrees with realized returns
+        ordering, which means the deeper model corrects the wrong ordering of the shallow anchor, and
+        \(c_{k,t+1}\) is assigned \(-1\) if the shallow anchor's ordering is correct but the deeper model's
+        ordering is wrong.</p>
+
+        <p>Averaging \(c_{k,t+1}\) gives the revision accuracy \(C_{t+1}\), with \(100\%\) indicating every
+        revision is correct and \(-100\%\) indicating every revision is wrong.</p>
+
+        <p>Because a correct revision may be more valuable when the realized returns of the two stocks are far
+        apart, we weight each \(c_{k,t+1}\) by the realized return difference to get the revision economic value
+        \(V_{t+1}\). Revision economic value \(V_{t+1}\) measures the economic value of these revisions over all
+        \(n_t\) stock pairs, where \(i_k\) and \(j_k\) are the stocks in changed pair \(k\) and unchanged pairs
+        contribute zero.</p>
+
+        <p>A positive revision economic value indicates refinement on average, and a negative value indicates
+        deterioration. We report \(P_t\) on its original scale, \(C_{t+1}\) in percent, and \(V_{t+1}\) in basis
+        points.</p>
+
+        <p>Revision economic value is the deep ranking economic value minus the shallow ranking economic value.</p>
+
+        <figure class="evidence-figure" style="--width: min(90%, 748.625px); --font-scale: 1;">
+          <div class="slide-figure" style="aspect-ratio: 632.35586 / 284.6728;">
+            <div class="slide-image" data-include="/asset/residual-learning/forecast-refinement.svg" role="img" aria-label="Forecast Preservation and Refinement by Depth"></div>
+            <div class="slide-image slide-image-dark" data-include="/asset/residual-learning/forecast-refinement-dark.svg" aria-hidden="true"></div>
+          </div>
+        </figure>
+
+        <details class="fold" open>
+          <summary>Forecast Preservation and Refinement by Depth Group</summary>
+          <div class="fold-content">
+            <div class="table-scroll" data-include="/asset/residual-learning/tables/forecast-refinement.html"></div>
+          </div>
+        </details>
+
+        <p>Preservation scores \(P_t\) for ResNet are close to 1 and nearly the same throughout the depth range,
+        and its revision accuracy \(C_{t+1}\) is positive for both the medium and the deep group; for NN, the
+        preservation scores are also close to 1 but lower than those for ResNet, while its revision accuracy is
+        negative. However, the revision economic values \(V_{t+1}\) for ResNet and NN are both negative, with
+        ResNet showing a smaller negative value.</p>
+
+        <p>For ResNet+, the preservation scores are nearly the same throughout the depth range, while its
+        revision accuracy and revision economic values show refinement and are higher than those of NN+. For
+        NN+, by contrast, the preservation scores fall from 0.75 to 0.64, and its revision accuracy shows
+        deterioration as depth increases.</p>
+
+        <p>To further explore the economic intuition underlying the preservation and refinement, we examine
+        which firm characteristics the deeper models rely on to retain the shallow forecast ranking and make
+        accurate and economically valuable revisions. We group the firm characteristics into 13 economic themes
+        according to <a href="#ref-jensen2023ThereReplicationCrisisa">Jensen et al. (2023)</a> and set the
+        characteristics in each theme to zero, one theme at a time. Holding the fitted models and other inputs
+        fixed, we set the same theme to zero in both shallow and deep models, recompute their forecasts, and
+        measure the resulting changes.</p>
+
+        <details class="fold" open>
+          <summary>Forecast Preservation and Revision Losses by Theme</summary>
+          <div class="fold-content">
+            <div class="table-scroll" data-include="/asset/residual-learning/tables/theme-losses.html"></div>
+          </div>
+        </details>
+
+        <p>For the &#x201C;Low Leverage&#x201D; and &#x201C;Size&#x201D; themes, the residual-learning framework
+        in deep ResNet+ reorders the ranking made by the shallow anchor more extensively and achieves a
+        significantly higher revision economic value, showing economic refinement. By contrast, in the NN+
+        model, the significantly heavier reordering is accompanied by deterioration in revision economic value,
+        and preservation is accompanied by deterioration under the &#x201C;Low Risk&#x201D;,
+        &#x201C;Quality&#x201D;, &#x201C;Short-Term Reversal&#x201D; and &#x201C;Value&#x201D; themes.</p>
+
+      </section>
+
+      <section id="robustness">
+        <h2>Do the results hold up?</h2>
+        <p>Robustness tests change the stock universe, trading cost, or market state one at a time, with other
+        settings kept the same throughout each exercise.</p>
+
+        <p>The ResNet+ versus NN+ gap stays large and distinct after excluding extremely large- or small-cap
+        stocks, survives transaction costs, and persists across most of the NBER business cycles.</p>
+
+        <details class="fold" open>
+          <summary>Market Capitalization</summary>
+          <div class="fold-content">
+            <p>We remove either the smallest or the largest 20 percent of stocks from the stock universe each
+            month based on current market capitalization, then give the models the trimmed universe to generate
+            raw forecasts, and finally form value-weighted long-short portfolios based on the forecast deciles.</p>
+
+            <p>These results show that residual models make the result more robust when a particular market
+            capitalization segment is excluded.</p>
+
+            <div class="table-scroll" data-include="/asset/residual-learning/tables/market-capitalization.html"></div>
+          </div>
+        </details>
+
+        <details class="fold" open>
+          <summary>Trading Frictions</summary>
+          <div class="fold-content">
+            <p>To examine whether the advantage of residual learning persists after accounting for trading
+            frictions, we consider two linear transaction cost rates as trading frictions: 10 and 50 basis
+            points (bps) per dollar traded.</p>
+
+            <p>The difference between ResNet+ and NN+ in the shallow group is not statistically significant
+            without transaction costs but becomes significant at 50 bps. Every significant \(\Delta\) SR without
+            transaction costs, remains significant after costs are introduced. These results show that the
+            advantage of residual learning persists under transaction costs, and the advantage widens as the
+            cost rate rises.</p>
+
+            <div class="table-scroll" data-include="/asset/residual-learning/tables/trading-frictions.html"></div>
+          </div>
+        </details>
+
+        <details class="fold" open>
+          <summary>Market States</summary>
+          <div class="fold-content">
+            <p>The market states analysis examines how the model mean return varies across expansions and
+            recessions.</p>
+
+            <p>Four of the five differences are significant at the 5 percent level. The two longest expansions
+            account for more than half of all months, and both have significantly positive differences. During
+            recessions, however, only three of the four mean return differences are positive, and these
+            differences are either statistically insignificant or based on too few months for inference. The
+            negative difference occurs in March and April 2020, the two months of the COVID recession; both
+            ResNet+ and NN+ have negative mean returns in this subperiod, showing that the return patterns
+            learned from earlier data do not translate into profitable portfolios during this short period.</p>
+
+            <div class="table-scroll" data-include="/asset/residual-learning/tables/market-states.html"></div>
+          </div>
+        </details>
+
+      </section>
+
+      <section id="takeaway">
+        <h2>Takeaway</h2>
+        <p>"Shallow is a special case of deep".</p>
+        <p>Residual learning enables asset pricing models to benefit from greater depth.</p>
+        <p>Greater depths preserve and refine stock rankings.</p>
+        <p>Our code is open source, models are modular, and the components can be reused to improve other neural-network-based asset pricing models.</p>
+        <p>Native large asset pricing models are feasible.</p>
+      </section>
+
+      <details id="references" class="fold references">
+        <summary><h2>References</h2></summary>
+        <div class="fold-content">
+          <ol>
+            <li id="ref-avramov2012AnomaliesFinancialDistress">Avramov, D., T.&nbsp;Chordia, G.&nbsp;Jostova,
+            and A.&nbsp;Philipov (2012, April). Anomalies and Financial Distress.</li>
+            <li id="ref-ba2016layer">Ba, J.&nbsp;L., J.&nbsp;R. Kiros, and G.&nbsp;E. Hinton (2016, July). Layer
+            Normalization.</li>
+            <li id="ref-bali2023optionml">Bali, T.&nbsp;G., H.&nbsp;Beckmeyer, M.&nbsp;R.&nbsp;W. M&#xF6;rke,
+            and F.&nbsp;Weigert (2023). Option return predictability with machine learning and big data. <em>Review
+            of Financial Studies</em>&nbsp;<em>36</em>(9), 3548&#x2013;3602.</li>
+            <li id="ref-bartlett2017spectrally">Bartlett, P.&nbsp;L., D.&nbsp;J. Foster, and M.&nbsp;J.
+            Telgarsky (2017). Spectrally-normalized margin bounds for neural networks. In <em>Advances in Neural
+            Information Processing Systems</em>, pp. 6240&#x2013;6251.</li>
+            <li id="ref-bell2024bondml">Bell, S., A.&nbsp;Kakhbod, M.&nbsp;Lettau, and A.&nbsp;Nazemi (2026).
+            Glass box machine learning and corporate bond returns. <em>Journal of Financial Economics</em>&nbsp;<em>181</em>,
+            104294.</li>
+            <li id="ref-brown2020LanguageModelsAre">Brown, T., B.&nbsp;Mann, N.&nbsp;Ryder, M.&nbsp;Subbiah,
+            J.&nbsp;D. Kaplan, P.&nbsp;Dhariwal, A.&nbsp;Neelakantan, P.&nbsp;Shyam, G.&nbsp;Sastry,
+            A.&nbsp;Askell, S.&nbsp;Agarwal, A.&nbsp;Herbert-Voss, G.&nbsp;Krueger, T.&nbsp;Henighan,
+            R.&nbsp;Child, A.&nbsp;Ramesh, D.&nbsp;Ziegler, J.&nbsp;Wu, C.&nbsp;Winter, C.&nbsp;Hesse,
+            M.&nbsp;Chen, E.&nbsp;Sigler, M.&nbsp;Litwin, S.&nbsp;Gray, B.&nbsp;Chess, J.&nbsp;Clark,
+            C.&nbsp;Berner, S.&nbsp;McCandlish, A.&nbsp;Radford, I.&nbsp;Sutskever, and D.&nbsp;Amodei (2020).
+            Language Models are Few-Shot Learners. In <em>Advances in Neural Information Processing Systems</em>,
+            Volume&nbsp;33, pp. 1877&#x2013;1901. Curran Associates, Inc.</li>
+            <li id="ref-Carhart1997">Carhart, M.&nbsp;M. (1997). On persistence in mutual fund performance. <em>The
+            Journal of Finance</em>&nbsp;<em>52</em>(1), 57&#x2013;82.</li>
+            <li id="ref-chen2025ChatGPTDeepseekCan">Chen, J., G.&nbsp;Tang, G.&nbsp;Zhou, and W.&nbsp;Zhu (2025,
+            February). ChatGPT and Deepseek: Can They Predict the Stock Market and Macroeconomy?</li>
+            <li id="ref-chen2024DeepLearningAsset">Chen, L., M.&nbsp;Pelger, and J.&nbsp;Zhu (2024, February).
+            Deep Learning in Asset Pricing. <em>Management Science</em>&nbsp;<em>70</em>(2), 714&#x2013;750.</li>
+            <li id="ref-chen2022ExpectedReturnsLarge">Chen, Y., B.&nbsp;T. Kelly, and D.&nbsp;Xiu (2022,
+            November). Expected Returns and Large Language Models.</li>
+            <li id="ref-chowdhery2022PaLM">Chowdhery, A., S.&nbsp;Narang, J.&nbsp;Devlin, M.&nbsp;Bosma,
+            G.&nbsp;Mishra, A.&nbsp;Roberts, P.&nbsp;Barham, H.&nbsp;W. Chung, C.&nbsp;Sutton, S.&nbsp;Gehrmann,
+            et&nbsp;al. (2022). PaLM: Scaling language modeling with pathways.</li>
+            <li id="ref-devlin2019BERT">Devlin, J., M.-W. Chang, K.&nbsp;Lee, and K.&nbsp;Toutanova (2019).
+            BERT: Pre-training of deep bidirectional transformers for language understanding. In <em>Proceedings
+            of the 2019 Conference of the North American Chapter of the Association for Computational
+            Linguistics: Human Language Technologies</em>, pp. 4171&#x2013;4186. Association for Computational
+            Linguistics.</li>
+            <li id="ref-FamaFrench1993">Fama, E.&nbsp;F. and K.&nbsp;R. French (1993). Common risk factors in
+            the returns on stocks and bonds. <em>Journal of Financial Economics</em>&nbsp;<em>33</em>(1),
+            3&#x2013;56.</li>
+            <li id="ref-FamaFrench2008Dissecting">Fama, E.&nbsp;F. and K.&nbsp;R. French (2008). Dissecting
+            anomalies. <em>The Journal of Finance</em>&nbsp;<em>63</em>(4), 1653&#x2013;1678.</li>
+            <li id="ref-fama2015FivefactorAssetPricing">Fama, E.&nbsp;F. and K.&nbsp;R. French (2015, April). A
+            five-factor asset pricing model. <em>Journal of Financial Economics</em>&nbsp;<em>116</em>(1),
+            1&#x2013;22.</li>
+            <li id="ref-freyberger2020DissectingCharacteristicsNonparametrically">Freyberger, J.,
+            A.&nbsp;Neuhierl, and M.&nbsp;Weber (2020, May). Dissecting Characteristics Nonparametrically. <em>The
+            Review of Financial Studies</em>&nbsp;<em>33</em>(5), 2326&#x2013;2377.</li>
+            <li id="ref-gu2020EmpiricalAssetPricing">Gu, S., B.&nbsp;Kelly, and D.&nbsp;Xiu (2020, May).
+            Empirical Asset Pricing via Machine Learning. <em>The Review of Financial Studies</em>&nbsp;<em>33</em>(5),
+            2223&#x2013;2273.</li>
+            <li id="ref-gu2021AutoencoderAssetPricinga">Gu, S., B.&nbsp;Kelly, and D.&nbsp;Xiu (2021, May).
+            Autoencoder asset pricing models. <em>Journal of Econometrics</em>&nbsp;<em>222</em>(1),
+            429&#x2013;450.</li>
+            <li id="ref-hanin2019finite">Hanin, B. and M.&nbsp;Nica (2020). Finite depth and width corrections
+            to the neural tangent kernel. In <em>International conference on learning representations</em>.
+            arXiv: 1909.05989 [cs.LG].</li>
+            <li id="ref-harvey2016CrossSectionExpectedReturns">Harvey, C.&nbsp;R., Y.&nbsp;Liu, and H.&nbsp;Zhu
+            (2016, January). &#x2026; and the Cross-Section of Expected Returns. <em>The Review of Financial
+            Studies</em>&nbsp;<em>29</em>(1), 5&#x2013;68.</li>
+            <li id="ref-he2015delving">He, K., X.&nbsp;Zhang, S.&nbsp;Ren, and J.&nbsp;Sun (2015). Delving deep
+            into rectifiers: Surpassing human-level performance on imagenet classification. In <em>Proceedings
+            of the IEEE international conference on computer vision</em>, pp. 1026&#x2013;1034.
+            <a href="https://arxiv.org/abs/1502.01852">Paper</a>.</li>
+            <li id="ref-he2016deep">He, K., X.&nbsp;Zhang, S.&nbsp;Ren, and J.&nbsp;Sun (2016a, June). Deep
+            Residual Learning for Image Recognition. In <em>2016 IEEE Conference on Computer Vision and Pattern
+            Recognition (CVPR)</em>, Las Vegas, NV, USA, pp. 770&#x2013;778. IEEE.</li>
+            <li id="ref-he2016identity">He, K., X.&nbsp;Zhang, S.&nbsp;Ren, and J.&nbsp;Sun (2016b). Identity
+            Mappings in Deep Residual Networks. In B.&nbsp;Leibe, J.&nbsp;Matas, N.&nbsp;Sebe, and
+            M.&nbsp;Welling (Eds.), <em>Computer Vision &#x2013; ECCV 2016</em>, Cham, pp. 630&#x2013;645.
+            Springer International Publishing.</li>
+            <li id="ref-hoffmann2022TrainingComputeOptimal">Hoffmann, J., S.&nbsp;Borgeaud, A.&nbsp;Mensch,
+            E.&nbsp;Buchatskaya, T.&nbsp;Cai, E.&nbsp;Rutherford, D.&nbsp;d.&nbsp;L. Casas, L.&nbsp;A.
+            Hendricks, J.&nbsp;Welbl, A.&nbsp;Clark, et&nbsp;al. (2022). Training compute-optimal large language
+            models.</li>
+            <li id="ref-HouXueZhang2015">Hou, K., C.&nbsp;Xue, and L.&nbsp;Zhang (2015). Digesting anomalies: An
+            investment approach. <em>The Review of Financial Studies</em>&nbsp;<em>28</em>(3), 650&#x2013;705.</li>
+            <li id="ref-hou2020ReplicatingAnomalies">Hou, K., C.&nbsp;Xue, and L.&nbsp;Zhang (2020, May).
+            Replicating Anomalies. <em>The Review of Financial Studies</em>&nbsp;<em>33</em>(5),
+            2019&#x2013;2133.</li>
+            <li id="ref-ioffe2015BatchNormalizationAccelerating">Ioffe, S. and C.&nbsp;Szegedy (2015, July).
+            Batch normalization: Accelerating deep network training by reducing internal covariate shift. In
+            <em>Proceedings of the 32nd International Conference on Machine Learning - Volume 37</em>, ICML'15,
+            Lille, France, pp. 448&#x2013;456. JMLR.org.</li>
+            <li id="ref-jensen2023ThereReplicationCrisisa">Jensen, T.&nbsp;I., B.&nbsp;Kelly, and L.&nbsp;H.
+            Pedersen (2023). Is There a Replication Crisis in Finance? <em>The Journal of Finance</em>&nbsp;<em>78</em>(5),
+            2465&#x2013;2518.</li>
+            <li id="ref-jiang2023ReImaginingPriceTrends">Jiang, J., B.&nbsp;Kelly, and D.&nbsp;Xiu (2023).
+            (Re-)Imag(in)ing Price Trends. <em>The Journal of Finance</em>&nbsp;<em>78</em>(6),
+            3193&#x2013;3249.</li>
+            <li id="ref-kelly2026LargeDeepFactor">Kelly, B., B.&nbsp;Kuznetsov, S.&nbsp;Malamud, and
+            Y.&nbsp;Zhang (2026, June). Large and Deep Factor Models.</li>
+            <li id="ref-LedoitWolf2008Sharpe">Ledoit, O. and M.&nbsp;Wolf (2008). Robust performance hypothesis
+            testing with the sharpe ratio. <em>Journal of Empirical Finance</em>&nbsp;<em>15</em>(5),
+            850&#x2013;859.</li>
+            <li id="ref-lo2023DeeplearningModelsForecasting">Lo, A.&nbsp;W. and M.&nbsp;Singh (2023, June).
+            Deep-learning models for forecasting financial risk premia and their interpretations. <em>Quantitative
+            Finance</em>&nbsp;<em>23</em>(6), 917&#x2013;929.</li>
+            <li id="ref-lopez-lira2023CanChatGPTForecast">Lopez-Lira, A. and Y.&nbsp;Tang (2026). Can ChatGPT
+            Forecast Stock Price Movements? Return Predictability and Large Language Models. <em>Journal of
+            Financial Economics</em>&nbsp;<em>184</em>, 104335.</li>
+            <li id="ref-lu2017expressive">Lu, Z., H.&nbsp;Pu, F.&nbsp;Wang, Z.&nbsp;Hu, and L.&nbsp;Wang (2017).
+            The expressive power of neural networks: A view from the width. In <em>Advances in Neural
+            Information Processing Systems</em>, Volume&nbsp;30, pp. 6231&#x2013;6239.</li>
+            <li id="ref-msci2013BarraUSE4">MSCI (2013). Barra US Equity Model (USE4). MSCI factsheet.</li>
+            <li id="ref-NBERBusinessCycleDating">National Bureau of Economic Research (n.d.). Us business cycle
+            expansions and contractions. Business Cycle Dating Committee data page. Accessed August 17, 2026.</li>
+            <li id="ref-NeweyWest1987">Newey, W.&nbsp;K. and K.&nbsp;D. West (1987). A simple, positive
+            semi-definite, heteroskedasticity and autocorrelation consistent covariance matrix. <em>Econometrica</em>&nbsp;<em>55</em>(3),
+            703&#x2013;708.</li>
+            <li id="ref-NguyenLo2012">Nguyen, T.-D. and A.&nbsp;W. Lo (2012). Robust ranking and portfolio
+            optimization. <em>European Journal of Operational Research</em>&nbsp;<em>221</em>(2),
+            407&#x2013;416.</li>
+            <li id="ref-ni2024nonlinearity">Ni, Y., Y.&nbsp;Guo, J.&nbsp;Jia, and L.&nbsp;Huang (2024, July). On
+            the nonlinearity of layer normalization. In R.&nbsp;Salakhutdinov, Z.&nbsp;Kolter, K.&nbsp;Heller,
+            A.&nbsp;Weller, N.&nbsp;Oliver, J.&nbsp;Scarlett, and F.&nbsp;Berkenkamp (Eds.), <em>Proceedings of
+            the 41st international conference on machine learning</em>, Volume 235 of <em>Proceedings of machine
+            learning research</em>, pp. 37957&#x2013;37998. PMLR. arXiv: 2406.01255 [cs.LG].</li>
+            <li id="ref-radford2023RobustSpeechRecognition">Radford, A., J.&nbsp;W. Kim, T.&nbsp;Xu,
+            G.&nbsp;Brockman, C.&nbsp;McLeavey, and I.&nbsp;Sutskever (2023, July). Robust speech recognition
+            via large-scale weak supervision. In <em>Proceedings of the 40th International Conference on Machine
+            Learning</em>, Volume 202 of <em>ICML'23</em>, Honolulu, Hawaii, USA, pp. 28492&#x2013;28518.
+            JMLR.org.</li>
+            <li id="ref-RapachStraussZhou2010">Rapach, D.&nbsp;E., J.&nbsp;K. Strauss, and G.&nbsp;Zhou (2010).
+            Out-of-sample equity premium prediction: Combination forecasts and links to the real economy. <em>Review
+            of Financial Studies</em>&nbsp;<em>23</em>(2), 821&#x2013;862.</li>
+            <li id="ref-romero2015fitnets">Romero, A., N.&nbsp;Ballas, S.&nbsp;E. Kahou, A.&nbsp;Chassang,
+            C.&nbsp;Gatta, and Y.&nbsp;Bengio (2015). FitNets: Hints for Thin Deep Nets. In <em>International
+            Conference on Learning Representations</em>. <a href="https://arxiv.org/abs/1412.6550">Paper</a>.</li>
+            <li id="ref-ruthotto2020deep">Ruthotto, L. and E.&nbsp;Haber (2020). Deep neural networks motivated
+            by partial differential equations. <em>Journal of Mathematical Imaging and Vision</em>&nbsp;<em>62</em>(3),
+            352&#x2013;364.</li>
+            <li id="ref-sharpe1964CapitalAssetPrices">Sharpe, W.&nbsp;F. (1964). Capital Asset Prices: A Theory
+            of Market Equilibrium under Conditions of Risk. <em>The Journal of Finance</em>&nbsp;<em>19</em>(3),
+            425&#x2013;442.</li>
+            <li id="ref-Srivastava2014">Srivastava, N., G.&nbsp;Hinton, A.&nbsp;Krizhevsky, I.&nbsp;Sutskever,
+            and R.&nbsp;Salakhutdinov (2014). Dropout: A simple way to prevent neural networks from overfitting.
+            <em>Journal of Machine Learning Research</em>&nbsp;<em>15</em>, 1929&#x2013;1958.</li>
+            <li id="ref-srivastava2015training">Srivastava, R.&nbsp;K., K.&nbsp;Greff, and J.&nbsp;Schmidhuber
+            (2015). Training Very Deep Networks. In <em>Advances in Neural Information Processing
+            Systems</em>, Volume&nbsp;28.
+            <a href="https://papers.nips.cc/paper/2015/hash/215a71a12769b056c3c32e7299f1c5ed-Abstract.html">Paper</a>.</li>
+            <li id="ref-telgarsky2016benefits">Telgarsky, M. (2016). Benefits of depth in neural networks. In
+            <em>Conference on Learning Theory</em>, pp. 1517&#x2013;1539. PMLR.</li>
+            <li id="ref-touvron2023LLaMA">Touvron, H., T.&nbsp;Lavril, G.&nbsp;Izacard, X.&nbsp;Martinet, M.-A.
+            Lachaux, T.&nbsp;Lacroix, B.&nbsp;Roziere, N.&nbsp;Goyal, E.&nbsp;Hambro, F.&nbsp;Azhar, et&nbsp;al.
+            (2023). LLaMA: Open and efficient foundation language models.</li>
+            <li id="ref-vershynin2018high">Vershynin, R. (2018). <em>High-Dimensional Probability: An
+            Introduction with Applications in Data Science</em>. Cambridge Series in Statistical and
+            Probabilistic Mathematics. Cambridge University Press.</li>
+            <li id="ref-welch2008ComprehensiveLookEmpirical">Welch, I. and A.&nbsp;Goyal (2008, July). A
+            Comprehensive Look at The Empirical Performance of Equity Premium Prediction. <em>The Review of
+            Financial Studies</em>&nbsp;<em>21</em>(4), 1455&#x2013;1508.</li>
+            <li id="ref-wu2023BloombergGPTLargeLanguage">Wu, S., O.&nbsp;Irsoy, S.&nbsp;Lu, V.&nbsp;Dabravolski,
+            M.&nbsp;Dredze, S.&nbsp;Gehrmann, P.&nbsp;Kambadur, D.&nbsp;Rosenberg, and G.&nbsp;Mann (2023,
+            December). BloombergGPT: A Large Language Model for Finance.</li>
+            <li id="ref-xiao2018dynamical">Xiao, L., Y.&nbsp;Bahri, J.&nbsp;Sohl-Dickstein, S.&nbsp;Schoenholz,
+            and J.&nbsp;Pennington (2018, July). Dynamical isometry and a mean field theory of CNNs: How to
+            train 10,000-layer vanilla convolutional neural networks. In J.&nbsp;Dy and A.&nbsp;Krause (Eds.),
+            <em>Proceedings of the 35th international conference on machine learning</em>, Volume&nbsp;80 of
+            <em>Proceedings of machine learning research</em>, pp. 5393&#x2013;5402. PMLR.</li>
+            <li id="ref-yang2020feature">Yang, G. et&nbsp;al. (2020). Feature normalization layers in deep
+            learning: A theoretical perspective. In <em>Advances in Neural Information Processing Systems</em>,
+            Volume&nbsp;33, pp. 6114&#x2013;6126.</li>
+            <li id="ref-yang2025FinGPTOpenSourceFinancial">Yang, H., X.-Y. Liu, and C.&nbsp;D. Wang (2025,
+            November). FinGPT: Open-Source Financial Large Language Models.</li>
+            <li id="ref-zhang2022AssetPricingDeep">Zhang, C. (2022, September). Asset Pricing and Deep Learning.</li>
+          </ol>
+        </div>
+      </details>
+
+      <template id="fn-1">
+        <q>The loss scales as a power-law with model size, dataset size, and the amount of compute used for training [...]</q>
+        <a href="https://arxiv.org/abs/2001.08361">Kaplan et al. (2020), Abstract</a>.
+      </template>
+      <template id="fn-2">
+        \(X_1\) is market excess return \(R_{m,t}-R_{f,t}\),
+          \(X_2\) is the size-factor return \(SMB_t\), and \(X_3\) is the value-factor return \(HML_t\);
+          \(y\) is stock excess return. <a href="#ref-FamaFrench1993">Fama and French (1993)</a>.
+      </template>
+      <template id="fn-3">
+        \(X_1\) is market excess return, \(X_2\) is SMB, \(X_3\) is HML, and
+          \(X_4\) is the momentum-factor return, denoted PR1YR in the original paper; \(y\) is stock excess
+          return. PR1YR is a momentum-portfolio return, not an individual stock's past-year return.
+          <a href="https://doi.org/10.1111/j.1540-6261.1997.tb03808.x">Carhart (1997)</a>.
+      </template>
+      <template id="fn-4">
+        \(X_{i,k,t}\) is stock \(i\)'s exposure to factor \(k\), \(f_{k,t}\)
+          is the factor return, and \(y_{i,t}\) is the stock return. USE4 has 60 industry factors, 12 style
+          factors, and one Country factor. The equation includes all 73; the timeline and the original
+          parameter-scale figure show the 72 industry and style factors. Estimation uses an identification
+          constraint, so 73 is not a count of independent free parameters. The timeline's 2013 date follows the
+          cited factsheet; USE4 was introduced in 2011.
+          <a href="https://www.msci.com/documents/10199/242721/Barra_US_Equity_Model_USE4.pdf">MSCI factsheet</a>;
+          <a href="https://dmmn26wgpgtie.cloudfront.net/wp-content/uploads/2011/09/23120404/USE4_Methodology_Notes_August_2011.pdf">MSCI
+          methodology, Section 3.1</a>.
+      </template>
+      <template id="fn-5">
+        \(X_{i,k,t}\) is a firm characteristic at time \(t\), such as size,
+          book-to-market, momentum, or profitability; \(y_{i,t+1}\) is the next-period stock excess return.
+          \(K\) is generic. The timeline's 316 is the number of distinct factors catalogued across the
+          literature by Harvey, Liu, and Zhu, not the number of fitted coefficients in one common model.
+          <a href="https://people.duke.edu/~charvey/Research/Published_Papers/P118_and_the_cross.PDF">Harvey,
+          Liu, and Zhu (2016)</a>.
+      </template>
+      <template id="fn-6">
+        \(X_{i,t}\) is the feature vector for stock \(i\) at time \(t\), and
+          \(f_\theta\) is the nonlinear mapping determined by neural-network parameters \(\theta\).
+          Neural-network counts in the timeline use this study's input dimensions and specifications.
+          <a href="#ref-gu2020EmpiricalAssetPricing">Gu, Kelly, and Xiu (2020)</a>.
+      </template>
+
+      <footer class="copyright">
+        <p class="copyright-text">&#xA9; 2020-2026 by Dexin PENG. All rights reserved.</p>
+
+      </footer>
+    </main>
+    <script src="/js/icon.js"></script>
+    <script defer src="/asset/katex/katex.min.js"></script>
+    <script defer src="/asset/katex/auto-render.min.js"></script>
+    <script defer src="/js/residual-learning.js"></script>
+    <script src="/js/reading-navigation.js"></script>
+  </body>
+</html>

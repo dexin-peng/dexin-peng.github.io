@@ -1,0 +1,75 @@
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th>ResNet vs NN</th>
+    <th>ResNet+ vs NN+</th>
+  </tr>
+  <tr>
+    <td rowspan="7">Data</td>
+    <td>Forecast Target</td>
+    <td colspan="2">Excess Return</td>
+  </tr>
+  <tr>
+    <td>Forecast Horizon</td>
+    <td colspan="2">One Month</td>
+  </tr>
+  <tr>
+    <td>Predictors</td>
+    <td colspan="2">153 JKP + 8 Macro</td>
+  </tr>
+  <tr>
+    <td>Sample</td>
+    <td colspan="2">Jan 1963&#x2013;Dec 2023</td>
+  </tr>
+  <tr>
+    <td>Universe</td>
+    <td colspan="2">U.S. Common Stocks</td>
+  </tr>
+  <tr>
+    <td>Forecast Origins</td>
+    <td colspan="2">Jan 1987&#x2013;Nov 2023</td>
+  </tr>
+  <tr>
+    <td>Realized Returns</td>
+    <td colspan="2">Feb 1987&#x2013;Dec 2023</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Training</td>
+    <td>Training Window</td>
+    <td colspan="2">Annually Expanding</td>
+  </tr>
+  <tr>
+    <td>Loss Function</td>
+    <td colspan="2">Mean Squared Error</td>
+  </tr>
+  <tr>
+    <td>Forecast Averaging</td>
+    <td colspan="2">10 Ensemble Members</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Variation</td>
+    <td>Width Schedules</td>
+    <td colspan="2">[32]; [32, 16]; [32, 16, 8]; [32, 16, 8, 4]</td>
+  </tr>
+  <tr>
+    <td>Depths</td>
+    <td colspan="2">1&#x2013;20</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Model</td>
+    <td>Feedforward Model</td>
+    <td>NN</td>
+    <td>NN+</td>
+  </tr>
+  <tr>
+    <td>Residual Model</td>
+    <td>ResNet</td>
+    <td>ResNet+</td>
+  </tr>
+  <tr>
+    <td>Residual Shortcut Path</td>
+    <td>Identity</td>
+    <td>Identity / Projection</td>
+  </tr>
+</table>

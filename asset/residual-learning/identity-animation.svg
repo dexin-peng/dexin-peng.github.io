@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="research-animation identity-animation"
+  width="960" height="494" viewBox="0 0 960 494"
+  role="img" aria-labelledby="identity-animation-title">
+<title id="identity-animation-title">Return Forecast</title>
+<style>
+.identity-animation { color: var(--standard-characters, #203448); font-family: "CMU Serif", "Times New Roman", Times, serif; }
+.identity-animation text { fill: currentColor; }
+.identity-animation .blue { color: var(--diagram-blue, #2a63a4); }
+.identity-animation .green { color: var(--diagram-green, #148777); }
+.identity-animation .orange { color: var(--diagram-orange, #c9712f); }
+.identity-animation .muted { color: var(--diagram-muted, #657485); }
+.identity-animation .axis { stroke: var(--line, #dce3ea); stroke-width: 1; }
+.identity-animation .flow { fill: none; stroke: currentColor; stroke-width: 1.35; stroke-linecap: square; stroke-linejoin: miter; }
+.identity-animation .card { fill: none; stroke: currentColor; stroke-width: 1.2; }
+.identity-animation .frame { fill: none; stroke: var(--line, #dce3ea); stroke-width: 1.4; }
+.identity-animation .signal { fill: currentColor; stroke: none; }
+.identity-animation, .identity-animation text, .identity-animation path, .identity-animation rect, .identity-animation line, .identity-animation g {
+  transition: color var(--theme-transition-duration, .382s) ease,
+              fill var(--theme-transition-duration, .382s) ease,
+              stroke var(--theme-transition-duration, .382s) ease;
+}
+.identity-animation .animation-static { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .identity-animation .animation-motion { display: none; }
+  .identity-animation .animation-static { display: inline; }
+}
+</style>
+<defs>
+<marker id="identity-arrow-blue" viewBox="0 0 7 6" refX="6" refY="3" markerWidth="7" markerHeight="6" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L7 3L0 6Z" style="fill:var(--diagram-blue, #2a63a4)"/></marker>
+<marker id="identity-arrow-green" viewBox="0 0 7 6" refX="6" refY="3" markerWidth="7" markerHeight="6" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L7 3L0 6Z" style="fill:var(--diagram-green, #148777)"/></marker>
+<marker id="identity-arrow-orange" viewBox="0 0 7 6" refX="6" refY="3" markerWidth="7" markerHeight="6" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L7 3L0 6Z" style="fill:var(--diagram-orange, #c9712f)"/></marker>
+</defs>
+<text x="480" y="35" text-anchor="middle" font-size="28" class="">R&#x302;<tspan baseline-shift="sub" font-size="68%">i,t+1</tspan> = f<tspan baseline-shift="sub" font-size="68%">&#x3B8;&#x209C;</tspan>(X<tspan baseline-shift="sub" font-size="68%">i,t</tspan>)</text>
+<text x="70" y="219" text-anchor="middle" font-size="29" class="">X<tspan baseline-shift="sub" font-size="68%">i,t</tspan></text>
+<text x="70" y="266" text-anchor="middle" font-size="18" font-weight="400" class="">Information Set</text>
+<path d="M112 210H145" class="flow blue" marker-end="url(#identity-arrow-blue)"/>
+<rect x="145" y="184" width="64" height="52" class="card blue"/>
+<text x="177" y="220" text-anchor="middle" font-size="30" class="blue">&#x1D4D8;</text>
+<text x="177" y="164" text-anchor="middle" font-size="20" font-weight="400" class="blue">Initial Map</text>
+<path d="M209 210H225" class="flow blue" marker-end="url(#identity-arrow-blue)"/>
+<text x="246" y="219" text-anchor="middle" font-size="26" class="">h<tspan baseline-shift="sub" font-size="68%">0</tspan></text>
+<text x="279" y="216" text-anchor="middle" font-size="26" class="">&#x22EF;</text>
+<text x="325" y="219" text-anchor="middle" font-size="26" class="">h<tspan baseline-shift="sub" font-size="68%">d&#x2212;1</tspan></text>
+<path d="M350 210H388" class="flow blue" marker-end="url(#identity-arrow-blue)"/>
+<rect x="368" y="76" width="290" height="218" class="frame"/>
+<path d="M388 210V118H630V195" class="flow green" marker-end="url(#identity-arrow-green)"/>
+<text x="510" y="102" text-anchor="middle" font-size="21" font-weight="400" class="green">Identity Mapping</text>
+<path d="M388 210H445" class="flow orange" marker-end="url(#identity-arrow-orange)"/>
+<rect x="445" y="184" width="70" height="52" class="card orange"/>
+<text x="480" y="219" text-anchor="middle" font-size="28" class="orange">g<tspan baseline-shift="sub" font-size="68%">d</tspan></text>
+<path d="M515 210H615" class="flow orange" marker-end="url(#identity-arrow-orange)"/>
+<text x="480" y="268" text-anchor="middle" font-size="21" font-weight="400" class="orange">Residual Update</text>
+<circle cx="630" cy="210" r="13" class="card"/>
+<path d="M623 210H637M630 203V217" class="flow"/>
+<path d="M644 210H677" class="flow blue" marker-end="url(#identity-arrow-blue)"/>
+<text x="704" y="219" text-anchor="middle" font-size="26" class="">h<tspan baseline-shift="sub" font-size="68%">d</tspan></text>
+<text x="752" y="216" text-anchor="middle" font-size="26" class="">&#x22EF;</text>
+<path d="M774 210H825" class="flow blue" marker-end="url(#identity-arrow-blue)"/>
+<text x="867" y="219" text-anchor="middle" font-size="29" class="">R&#x302;<tspan baseline-shift="sub" font-size="68%">i,t+1</tspan></text>
+<text x="867" y="267" text-anchor="middle" font-size="20" font-weight="400" class="">Return Forecast</text>
+<path d="M867 283V410H790" class="flow blue" marker-end="url(#identity-arrow-blue)"/>
+<text x="112" y="373" text-anchor="middle" font-size="20" font-weight="400" class="">Realized Return</text>
+<text x="112" y="417" text-anchor="middle" font-size="29" class="">R<tspan baseline-shift="sub" font-size="68%">i,t+1</tspan></text>
+<path d="M164 410H230" class="flow blue" marker-end="url(#identity-arrow-blue)"/>
+<rect x="230" y="340" width="560" height="120" class="card blue"/>
+<text x="510" y="373" text-anchor="middle" font-size="23" font-weight="400" class="blue">Mean Squared Error (MSE)</text>
+<text x="510" y="422" text-anchor="middle" font-size="27" class="">&#x3B8;<tspan baseline-shift="sub" font-size="68%">t</tspan><tspan baseline-shift="super" font-size="68%">*</tspan> = arg min<tspan baseline-shift="sub" font-size="68%">&#x3B8;</tspan> &#x1D53C;<tspan baseline-shift="sub" font-size="68%">t</tspan> &#x2016;R<tspan baseline-shift="sub" font-size="68%">t+1</tspan> &#x2212; R&#x302;<tspan baseline-shift="sub" font-size="68%">&#x3B8;,t+1</tspan>&#x2016;<tspan baseline-shift="super" font-size="68%">2</tspan></text>
+<g class="animation-motion">
+<circle r="3.6" class="signal blue" opacity="0">
+<animateMotion dur="7s" repeatCount="indefinite" path="M112 210H145"
+  keyPoints="0;0;1;1" keyTimes="0;0.03;0.1;1" calcMode="linear"/>
+<animate attributeName="opacity" dur="7s" repeatCount="indefinite"
+  values="0;0;1;1;0;0" keyTimes="0;0.03;0.040;0.090;0.1;1"/>
+</circle>
+<circle r="3.6" class="signal blue" opacity="0">
+<animateMotion dur="7s" repeatCount="indefinite" path="M209 210H225"
+  keyPoints="0;0;1;1" keyTimes="0;0.13;0.17;1" calcMode="linear"/>
+<animate attributeName="opacity" dur="7s" repeatCount="indefinite"
+  values="0;0;1;1;0;0" keyTimes="0;0.13;0.140;0.160;0.17;1"/>
+</circle>
+<circle r="3.6" class="signal blue" opacity="0">
+<animateMotion dur="7s" repeatCount="indefinite" path="M350 210H388"
+  keyPoints="0;0;1;1" keyTimes="0;0.2;0.26;1" calcMode="linear"/>
+<animate attributeName="opacity" dur="7s" repeatCount="indefinite"
+  values="0;0;1;1;0;0" keyTimes="0;0.2;0.210;0.250;0.26;1"/>
+</circle>
+<circle r="3.6" class="signal green" opacity="0">
+<animateMotion dur="7s" repeatCount="indefinite" path="M388 210V118H630V195"
+  keyPoints="0;0;1;1" keyTimes="0;0.26;0.55;1" calcMode="linear"/>
+<animate attributeName="opacity" dur="7s" repeatCount="indefinite"
+  values="0;0;1;1;0;0" keyTimes="0;0.26;0.270;0.540;0.55;1"/>
+</circle>
+<circle r="3.6" class="signal orange" opacity="0">
+<animateMotion dur="7s" repeatCount="indefinite" path="M388 210H445"
+  keyPoints="0;0;1;1" keyTimes="0;0.26;0.35;1" calcMode="linear"/>
+<animate attributeName="opacity" dur="7s" repeatCount="indefinite"
+  values="0;0;1;1;0;0" keyTimes="0;0.26;0.270;0.340;0.35;1"/>
+</circle>
+<circle r="3.6" class="signal orange" opacity="0">
+<animateMotion dur="7s" repeatCount="indefinite" path="M515 210H615"
+  keyPoints="0;0;1;1" keyTimes="0;0.4;0.55;1" calcMode="linear"/>
+<animate attributeName="opacity" dur="7s" repeatCount="indefinite"
+  values="0;0;1;1;0;0" keyTimes="0;0.4;0.410;0.540;0.55;1"/>
+</circle>
+<circle r="3.6" class="signal blue" opacity="0">
+<animateMotion dur="7s" repeatCount="indefinite" path="M644 210H677"
+  keyPoints="0;0;1;1" keyTimes="0;0.56;0.62;1" calcMode="linear"/>
+<animate attributeName="opacity" dur="7s" repeatCount="indefinite"
+  values="0;0;1;1;0;0" keyTimes="0;0.56;0.570;0.610;0.62;1"/>
+</circle>
+<circle r="3.6" class="signal blue" opacity="0">
+<animateMotion dur="7s" repeatCount="indefinite" path="M774 210H825"
+  keyPoints="0;0;1;1" keyTimes="0;0.64;0.7;1" calcMode="linear"/>
+<animate attributeName="opacity" dur="7s" repeatCount="indefinite"
+  values="0;0;1;1;0;0" keyTimes="0;0.64;0.650;0.690;0.7;1"/>
+</circle>
+<circle r="3.6" class="signal blue" opacity="0">
+<animateMotion dur="7s" repeatCount="indefinite" path="M867 283V410H790"
+  keyPoints="0;0;1;1" keyTimes="0;0.7;0.86;1" calcMode="linear"/>
+<animate attributeName="opacity" dur="7s" repeatCount="indefinite"
+  values="0;0;1;1;0;0" keyTimes="0;0.7;0.710;0.850;0.86;1"/>
+</circle>
+<circle r="3.6" class="signal blue" opacity="0">
+<animateMotion dur="7s" repeatCount="indefinite" path="M164 410H230"
+  keyPoints="0;0;1;1" keyTimes="0;0.77;0.86;1" calcMode="linear"/>
+<animate attributeName="opacity" dur="7s" repeatCount="indefinite"
+  values="0;0;1;1;0;0" keyTimes="0;0.77;0.780;0.850;0.86;1"/>
+</circle>
+<rect x="230" y="340" width="560" height="120" class="card blue" opacity="0" style="stroke-width:2.6">
+<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.84;.88;.96;1" dur="7s" repeatCount="indefinite"/>
+</rect></g></svg>

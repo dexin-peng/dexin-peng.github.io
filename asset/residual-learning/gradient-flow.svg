@@ -1,0 +1,310 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="650" viewBox="0 0 1000 650" class="research-animation gradient-flow" role="img" aria-labelledby="svg-gradient-flow--gradient-title" aria-describedby="svg-gradient-flow--gradient-desc" id="svg-gradient-flow" data-svg-controls="1">
+<style data-svg-controls="1">#svg-gradient-flow .svg-label{transform:scale(var(--font-scale,1));transform-box:fill-box;transform-origin:center;}</style><title id="svg-gradient-flow--gradient-title">Gradient Propagation and Branch Depth</title>
+<desc id="svg-gradient-flow--gradient-desc">Input gradient versus branch depth, comparing an FNN and a residual block. Each integer depth is a different number of scalar layers in the branch. The residual block has one identity shortcut around the whole branch. Both receive an incoming gradient of one. With the same local derivative s at each layer, blue is s to the power n, orange is the same branch contribution, green is the direct identity contribution of one, and the total is one plus s to the power n. Each local derivative is s=0.5. Below, both number lines show one ordinary SGD update of an earlier weight, starting at w=1 with X=w and learning rate 0.01. The ordinary update shrinks with depth while remaining nonzero. The residual-block update includes the direct identity contribution. These are independent updates at each depth. Lines interpolate between integer depths. This is not a training experiment or a plot of intermediate gradients inside a fixed network.</desc>
+<style>#svg-gradient-flow{ font-family: 'CMU Serif', 'TeX Gyre Termes', 'Times New Roman', serif; }
+#svg-gradient-flow text{ fill: var(--standard-characters, #203448); }
+#svg-gradient-flow .muted{ fill: var(--diagram-muted, #596975); }
+#svg-gradient-flow text.fnn,#svg-gradient-flow tspan.fnn,#svg-gradient-flow .sample.fnn{ fill: var(--diagram-blue, #0b76a0); }
+#svg-gradient-flow text.residual,#svg-gradient-flow tspan.residual,#svg-gradient-flow .sample.residual{ fill: var(--diagram-residual, #c04f15); }
+#svg-gradient-flow text.identity,#svg-gradient-flow tspan.identity{ fill: var(--diagram-identity, #3b7d23); }
+#svg-gradient-flow .sample.total{ fill: var(--standard-characters, #203448); }
+#svg-gradient-flow .trace{ fill: none; stroke-width: 2.618; stroke-linejoin: round; stroke-linecap: round; }
+#svg-gradient-flow .trace.fnn{ stroke: var(--diagram-blue, #0b76a0); }
+#svg-gradient-flow .trace.residual{ stroke: var(--diagram-residual, #c04f15); }
+#svg-gradient-flow .trace.identity{ stroke: var(--diagram-identity, #3b7d23); }
+#svg-gradient-flow .trace.total{ stroke: var(--standard-characters, #203448); }
+#svg-gradient-flow .identity{ stroke-dasharray: 5 5; }
+#svg-gradient-flow .update.identity{ stroke-dasharray: none; }
+#svg-gradient-flow .before{ fill: var(--background, #f5f5f5); stroke: var(--diagram-muted, #596975); stroke-width: 1.236; }
+#svg-gradient-flow .guide{ opacity: .146; stroke-width: 1.236; }
+#svg-gradient-flow .axis,#svg-gradient-flow .grid{ fill: none; stroke: var(--diagram-muted, #596975); stroke-width: .8; }
+#svg-gradient-flow .axis{ opacity: .618; }
+#svg-gradient-flow .grid{ opacity: .146; }
+#svg-gradient-flow text,#svg-gradient-flow tspan,#svg-gradient-flow path,#svg-gradient-flow line,#svg-gradient-flow circle{
+ transition: fill var(--theme-transition-duration, .382s), stroke var(--theme-transition-duration, .382s);
+}
+#svg-gradient-flow .animation-static{ display: none; }
+@media (prefers-reduced-motion: reduce){
+#svg-gradient-flow .animation-motion{ display: none; }
+#svg-gradient-flow .animation-static{ display: inline; }
+}</style>
+<g class="animation-motion">
+<g>
+<g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="35" font-size="31" class="fnn" text-anchor="middle">FNN</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="35" font-size="31" class="" text-anchor="middle">ResNet</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="71" font-size="25" text-anchor="middle">y = <tspan class="fnn">(0.5)<tspan baseline-shift="super" font-size="16">n</tspan><tspan baseline-shift="baseline"> X</tspan></tspan></text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="71" font-size="25" text-anchor="middle">y = <tspan class="identity">X</tspan> + <tspan class="residual">(0.5)<tspan baseline-shift="super" font-size="16">n</tspan><tspan baseline-shift="baseline"> X</tspan></tspan></text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="22" y="258" font-size="22" class="muted" text-anchor="middle" transform="rotate(-90 22 258)">Input Gradient</text>
+</g><path d="M80 380.0H460" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="68" y="386.0" font-size="19" class="muted" text-anchor="end">0</text>
+</g><path d="M80 304.2892459826947H460" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="68" y="310.2892459826947" font-size="19" class="muted" text-anchor="end">0.5</text>
+</g><path d="M80 228.5784919653894H460" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="68" y="234.5784919653894" font-size="19" class="muted" text-anchor="end">1</text>
+</g><path d="M80 152.86773794808406H460" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="68" y="158.86773794808406" font-size="19" class="muted" text-anchor="end">1.5</text>
+</g><path d="M80 135V380H460" class="axis" />
+<path d="M80.0 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="80.0" y="406" font-size="20" class="muted" text-anchor="middle">1</text>
+</g><path d="M134.28571428571428 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="134.28571428571428" y="406" font-size="20" class="muted" text-anchor="middle">2</text>
+</g><path d="M188.57142857142856 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="188.57142857142856" y="406" font-size="20" class="muted" text-anchor="middle">3</text>
+</g><path d="M242.85714285714286 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="242.85714285714286" y="406" font-size="20" class="muted" text-anchor="middle">4</text>
+</g><path d="M297.1428571428571 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="297.1428571428571" y="406" font-size="20" class="muted" text-anchor="middle">5</text>
+</g><path d="M351.42857142857144 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="351.42857142857144" y="406" font-size="20" class="muted" text-anchor="middle">6</text>
+</g><path d="M405.7142857142857 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="405.7142857142857" y="406" font-size="20" class="muted" text-anchor="middle">7</text>
+</g><path d="M460.0 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="460.0" y="406" font-size="20" class="muted" text-anchor="middle">8</text>
+</g><path d="M565 380.0H945" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="553" y="386.0" font-size="19" class="muted" text-anchor="end">0</text>
+</g><path d="M565 304.2892459826947H945" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="553" y="310.2892459826947" font-size="19" class="muted" text-anchor="end">0.5</text>
+</g><path d="M565 228.5784919653894H945" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="553" y="234.5784919653894" font-size="19" class="muted" text-anchor="end">1</text>
+</g><path d="M565 152.86773794808406H945" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="553" y="158.86773794808406" font-size="19" class="muted" text-anchor="end">1.5</text>
+</g><path d="M565 135V380H945" class="axis" />
+<path d="M565.0 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="565.0" y="406" font-size="20" class="muted" text-anchor="middle">1</text>
+</g><path d="M619.2857142857143 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="619.2857142857143" y="406" font-size="20" class="muted" text-anchor="middle">2</text>
+</g><path d="M673.5714285714286 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="673.5714285714286" y="406" font-size="20" class="muted" text-anchor="middle">3</text>
+</g><path d="M727.8571428571429 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="727.8571428571429" y="406" font-size="20" class="muted" text-anchor="middle">4</text>
+</g><path d="M782.1428571428571 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="782.1428571428571" y="406" font-size="20" class="muted" text-anchor="middle">5</text>
+</g><path d="M836.4285714285714 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="836.4285714285714" y="406" font-size="20" class="muted" text-anchor="middle">6</text>
+</g><path d="M890.7142857142858 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="890.7142857142858" y="406" font-size="20" class="muted" text-anchor="middle">7</text>
+</g><path d="M945.0 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="945.0" y="406" font-size="20" class="muted" text-anchor="middle">8</text>
+</g><defs>
+<clipPath id="svg-gradient-flow--clip-80"><rect x="74" y="127" width="12" height="261"><animate attributeName="width" keyTimes="0.00000000;0.08000000;0.68000000;1.00000000" values="12;12;392;392" dur="8.472s" repeatCount="indefinite" calcMode="linear" /></rect></clipPath>
+<clipPath id="svg-gradient-flow--clip-565"><rect x="559" y="127" width="12" height="261"><animate attributeName="width" keyTimes="0.00000000;0.08000000;0.68000000;1.00000000" values="12;12;392;392" dur="8.472s" repeatCount="indefinite" calcMode="linear" /></rect></clipPath>
+</defs>
+<path d="M565 228.5784919653894H945" class="trace identity" />
+<path d="M80.000,304.289 L86.786,310.573 L93.571,316.335 L100.357,321.619 L107.143,326.464 L113.929,330.908 L120.714,334.982 L127.500,338.718 L134.286,342.145 L141.071,345.286 L147.857,348.168 L154.643,350.810 L161.429,353.232 L168.214,355.454 L175.000,357.491 L181.786,359.359 L188.571,361.072 L195.357,362.643 L202.143,364.084 L208.929,365.405 L215.714,366.616 L222.500,367.727 L229.286,368.746 L236.071,369.680 L242.857,370.536 L249.643,371.322 L256.429,372.042 L263.214,372.702 L270.000,373.308 L276.786,373.863 L283.571,374.373 L290.357,374.840 L297.143,375.268 L303.929,375.661 L310.714,376.021 L317.500,376.351 L324.286,376.654 L331.071,376.932 L337.857,377.186 L344.643,377.420 L351.429,377.634 L358.214,377.830 L365.000,378.010 L371.786,378.176 L378.571,378.327 L385.357,378.466 L392.143,378.593 L398.929,378.710 L405.714,378.817 L412.500,378.915 L419.286,379.005 L426.071,379.088 L432.857,379.164 L439.643,379.233 L446.429,379.297 L453.214,379.355 L460.000,379.409" class="trace fnn guide" />
+<g clip-path="url(#svg-gradient-flow--clip-80)">
+<path d="M80.000,304.289 L86.786,310.573 L93.571,316.335 L100.357,321.619 L107.143,326.464 L113.929,330.908 L120.714,334.982 L127.500,338.718 L134.286,342.145 L141.071,345.286 L147.857,348.168 L154.643,350.810 L161.429,353.232 L168.214,355.454 L175.000,357.491 L181.786,359.359 L188.571,361.072 L195.357,362.643 L202.143,364.084 L208.929,365.405 L215.714,366.616 L222.500,367.727 L229.286,368.746 L236.071,369.680 L242.857,370.536 L249.643,371.322 L256.429,372.042 L263.214,372.702 L270.000,373.308 L276.786,373.863 L283.571,374.373 L290.357,374.840 L297.143,375.268 L303.929,375.661 L310.714,376.021 L317.500,376.351 L324.286,376.654 L331.071,376.932 L337.857,377.186 L344.643,377.420 L351.429,377.634 L358.214,377.830 L365.000,378.010 L371.786,378.176 L378.571,378.327 L385.357,378.466 L392.143,378.593 L398.929,378.710 L405.714,378.817 L412.500,378.915 L419.286,379.005 L426.071,379.088 L432.857,379.164 L439.643,379.233 L446.429,379.297 L453.214,379.355 L460.000,379.409" class="trace fnn" />
+<circle cx="80.0" cy="304.2892459826947" r="2.618" class="sample fnn" />
+<circle cx="134.28571428571428" cy="342.1446229913473" r="2.618" class="sample fnn" />
+<circle cx="188.57142857142856" cy="361.07231149567366" r="2.618" class="sample fnn" />
+<circle cx="242.85714285714286" cy="370.53615574783686" r="2.618" class="sample fnn" />
+<circle cx="297.1428571428571" cy="375.2680778739184" r="2.618" class="sample fnn" />
+<circle cx="351.42857142857144" cy="377.6340389369592" r="2.618" class="sample fnn" />
+<circle cx="405.7142857142857" cy="378.8170194684796" r="2.618" class="sample fnn" />
+<circle cx="460.0" cy="379.40850973423983" r="2.618" class="sample fnn" />
+</g>
+<circle cx="80.0" cy="304.2892459826947" r="5" class="sample fnn">
+<animate attributeName="cx" keyTimes="0.00000000;0.08000000;0.09071429;0.10142857;0.11214286;0.12285714;0.13357143;0.14428571;0.15500000;0.16571429;0.17642857;0.18714286;0.19785714;0.20857143;0.21928571;0.23000000;0.24071429;0.25142857;0.26214286;0.27285714;0.28357143;0.29428571;0.30500000;0.31571429;0.32642857;0.33714286;0.34785714;0.35857143;0.36928571;0.38000000;0.39071429;0.40142857;0.41214286;0.42285714;0.43357143;0.44428571;0.45500000;0.46571429;0.47642857;0.48714286;0.49785714;0.50857143;0.51928571;0.53000000;0.54071429;0.55142857;0.56214286;0.57285714;0.58357143;0.59428571;0.60500000;0.61571429;0.62642857;0.63714286;0.64785714;0.65857143;0.66928571;0.68000000;1.00000000" values="80.0;80.0;86.7857;93.5714;100.3571;107.1429;113.9286;120.7143;127.5;134.2857;141.0714;147.8571;154.6429;161.4286;168.2143;175.0;181.7857;188.5714;195.3571;202.1429;208.9286;215.7143;222.5;229.2857;236.0714;242.8571;249.6429;256.4286;263.2143;270.0;276.7857;283.5714;290.3571;297.1429;303.9286;310.7143;317.5;324.2857;331.0714;337.8571;344.6429;351.4286;358.2143;365.0;371.7857;378.5714;385.3571;392.1429;398.9286;405.7143;412.5;419.2857;426.0714;432.8571;439.6429;446.4286;453.2143;460.0;460.0" dur="8.472s" repeatCount="indefinite" calcMode="linear" />
+<animate attributeName="cy" keyTimes="0.00000000;0.08000000;0.09071429;0.10142857;0.11214286;0.12285714;0.13357143;0.14428571;0.15500000;0.16571429;0.17642857;0.18714286;0.19785714;0.20857143;0.21928571;0.23000000;0.24071429;0.25142857;0.26214286;0.27285714;0.28357143;0.29428571;0.30500000;0.31571429;0.32642857;0.33714286;0.34785714;0.35857143;0.36928571;0.38000000;0.39071429;0.40142857;0.41214286;0.42285714;0.43357143;0.44428571;0.45500000;0.46571429;0.47642857;0.48714286;0.49785714;0.50857143;0.51928571;0.53000000;0.54071429;0.55142857;0.56214286;0.57285714;0.58357143;0.59428571;0.60500000;0.61571429;0.62642857;0.63714286;0.64785714;0.65857143;0.66928571;0.68000000;1.00000000" values="304.2892;304.2892;310.5729;316.3351;321.619;326.4644;330.9076;334.9821;338.7184;342.1446;345.2865;348.1675;350.8095;353.2322;355.4538;357.4911;359.3592;361.0723;362.6432;364.0838;365.4048;366.6161;367.7269;368.7455;369.6796;370.5362;371.3216;372.0419;372.7024;373.3081;373.8635;374.3728;374.8398;375.2681;375.6608;376.0209;376.3512;376.654;376.9317;377.1864;377.4199;377.634;377.8304;378.0105;378.1756;378.327;378.4659;378.5932;378.71;378.817;378.9152;379.0052;379.0878;379.1635;379.2329;379.2966;379.355;379.4085;379.4085" dur="8.472s" repeatCount="indefinite" calcMode="linear" />
+</circle>
+<path d="M565.000,304.289 L571.786,310.573 L578.571,316.335 L585.357,321.619 L592.143,326.464 L598.929,330.908 L605.714,334.982 L612.500,338.718 L619.286,342.145 L626.071,345.286 L632.857,348.168 L639.643,350.810 L646.429,353.232 L653.214,355.454 L660.000,357.491 L666.786,359.359 L673.571,361.072 L680.357,362.643 L687.143,364.084 L693.929,365.405 L700.714,366.616 L707.500,367.727 L714.286,368.746 L721.071,369.680 L727.857,370.536 L734.643,371.322 L741.429,372.042 L748.214,372.702 L755.000,373.308 L761.786,373.863 L768.571,374.373 L775.357,374.840 L782.143,375.268 L788.929,375.661 L795.714,376.021 L802.500,376.351 L809.286,376.654 L816.071,376.932 L822.857,377.186 L829.643,377.420 L836.429,377.634 L843.214,377.830 L850.000,378.010 L856.786,378.176 L863.571,378.327 L870.357,378.466 L877.143,378.593 L883.929,378.710 L890.714,378.817 L897.500,378.915 L904.286,379.005 L911.071,379.088 L917.857,379.164 L924.643,379.233 L931.429,379.297 L938.214,379.355 L945.000,379.409" class="trace residual guide" />
+<g clip-path="url(#svg-gradient-flow--clip-565)">
+<path d="M565.000,304.289 L571.786,310.573 L578.571,316.335 L585.357,321.619 L592.143,326.464 L598.929,330.908 L605.714,334.982 L612.500,338.718 L619.286,342.145 L626.071,345.286 L632.857,348.168 L639.643,350.810 L646.429,353.232 L653.214,355.454 L660.000,357.491 L666.786,359.359 L673.571,361.072 L680.357,362.643 L687.143,364.084 L693.929,365.405 L700.714,366.616 L707.500,367.727 L714.286,368.746 L721.071,369.680 L727.857,370.536 L734.643,371.322 L741.429,372.042 L748.214,372.702 L755.000,373.308 L761.786,373.863 L768.571,374.373 L775.357,374.840 L782.143,375.268 L788.929,375.661 L795.714,376.021 L802.500,376.351 L809.286,376.654 L816.071,376.932 L822.857,377.186 L829.643,377.420 L836.429,377.634 L843.214,377.830 L850.000,378.010 L856.786,378.176 L863.571,378.327 L870.357,378.466 L877.143,378.593 L883.929,378.710 L890.714,378.817 L897.500,378.915 L904.286,379.005 L911.071,379.088 L917.857,379.164 L924.643,379.233 L931.429,379.297 L938.214,379.355 L945.000,379.409" class="trace residual" />
+<circle cx="565.0" cy="304.2892459826947" r="2.618" class="sample residual" />
+<circle cx="619.2857142857143" cy="342.1446229913473" r="2.618" class="sample residual" />
+<circle cx="673.5714285714286" cy="361.07231149567366" r="2.618" class="sample residual" />
+<circle cx="727.8571428571429" cy="370.53615574783686" r="2.618" class="sample residual" />
+<circle cx="782.1428571428571" cy="375.2680778739184" r="2.618" class="sample residual" />
+<circle cx="836.4285714285714" cy="377.6340389369592" r="2.618" class="sample residual" />
+<circle cx="890.7142857142858" cy="378.8170194684796" r="2.618" class="sample residual" />
+<circle cx="945.0" cy="379.40850973423983" r="2.618" class="sample residual" />
+</g>
+<circle cx="565.0" cy="304.2892459826947" r="5" class="sample residual">
+<animate attributeName="cx" keyTimes="0.00000000;0.08000000;0.09071429;0.10142857;0.11214286;0.12285714;0.13357143;0.14428571;0.15500000;0.16571429;0.17642857;0.18714286;0.19785714;0.20857143;0.21928571;0.23000000;0.24071429;0.25142857;0.26214286;0.27285714;0.28357143;0.29428571;0.30500000;0.31571429;0.32642857;0.33714286;0.34785714;0.35857143;0.36928571;0.38000000;0.39071429;0.40142857;0.41214286;0.42285714;0.43357143;0.44428571;0.45500000;0.46571429;0.47642857;0.48714286;0.49785714;0.50857143;0.51928571;0.53000000;0.54071429;0.55142857;0.56214286;0.57285714;0.58357143;0.59428571;0.60500000;0.61571429;0.62642857;0.63714286;0.64785714;0.65857143;0.66928571;0.68000000;1.00000000" values="565.0;565.0;571.7857;578.5714;585.3571;592.1429;598.9286;605.7143;612.5;619.2857;626.0714;632.8571;639.6429;646.4286;653.2143;660.0;666.7857;673.5714;680.3571;687.1429;693.9286;700.7143;707.5;714.2857;721.0714;727.8571;734.6429;741.4286;748.2143;755.0;761.7857;768.5714;775.3571;782.1429;788.9286;795.7143;802.5;809.2857;816.0714;822.8571;829.6429;836.4286;843.2143;850.0;856.7857;863.5714;870.3571;877.1429;883.9286;890.7143;897.5;904.2857;911.0714;917.8571;924.6429;931.4286;938.2143;945.0;945.0" dur="8.472s" repeatCount="indefinite" calcMode="linear" />
+<animate attributeName="cy" keyTimes="0.00000000;0.08000000;0.09071429;0.10142857;0.11214286;0.12285714;0.13357143;0.14428571;0.15500000;0.16571429;0.17642857;0.18714286;0.19785714;0.20857143;0.21928571;0.23000000;0.24071429;0.25142857;0.26214286;0.27285714;0.28357143;0.29428571;0.30500000;0.31571429;0.32642857;0.33714286;0.34785714;0.35857143;0.36928571;0.38000000;0.39071429;0.40142857;0.41214286;0.42285714;0.43357143;0.44428571;0.45500000;0.46571429;0.47642857;0.48714286;0.49785714;0.50857143;0.51928571;0.53000000;0.54071429;0.55142857;0.56214286;0.57285714;0.58357143;0.59428571;0.60500000;0.61571429;0.62642857;0.63714286;0.64785714;0.65857143;0.66928571;0.68000000;1.00000000" values="304.2892;304.2892;310.5729;316.3351;321.619;326.4644;330.9076;334.9821;338.7184;342.1446;345.2865;348.1675;350.8095;353.2322;355.4538;357.4911;359.3592;361.0723;362.6432;364.0838;365.4048;366.6161;367.7269;368.7455;369.6796;370.5362;371.3216;372.0419;372.7024;373.3081;373.8635;374.3728;374.8398;375.2681;375.6608;376.0209;376.3512;376.654;376.9317;377.1864;377.4199;377.634;377.8304;378.0105;378.1756;378.327;378.4659;378.5932;378.71;378.817;378.9152;379.0052;379.0878;379.1635;379.2329;379.2966;379.355;379.4085;379.4085" dur="8.472s" repeatCount="indefinite" calcMode="linear" />
+</circle>
+<path d="M565.000,152.868 L571.786,159.151 L578.571,164.914 L585.357,170.198 L592.143,175.043 L598.929,179.486 L605.714,183.561 L612.500,187.297 L619.286,190.723 L626.071,193.865 L632.857,196.746 L639.643,199.388 L646.429,201.811 L653.214,204.032 L660.000,206.070 L666.786,207.938 L673.571,209.651 L680.357,211.222 L687.143,212.662 L693.929,213.983 L700.714,215.195 L707.500,216.305 L714.286,217.324 L721.071,218.258 L727.857,219.115 L734.643,219.900 L741.429,220.620 L748.214,221.281 L755.000,221.887 L761.786,222.442 L768.571,222.951 L775.357,223.418 L782.143,223.847 L788.929,224.239 L795.714,224.599 L802.500,224.930 L809.286,225.233 L816.071,225.510 L822.857,225.765 L829.643,225.998 L836.429,226.213 L843.214,226.409 L850.000,226.589 L856.786,226.754 L863.571,226.906 L870.357,227.044 L877.143,227.172 L883.929,227.288 L890.714,227.396 L897.500,227.494 L904.286,227.584 L911.071,227.666 L917.857,227.742 L924.643,227.811 L931.429,227.875 L938.214,227.933 L945.000,227.987" class="trace total guide" />
+<g clip-path="url(#svg-gradient-flow--clip-565)">
+<path d="M565.000,152.868 L571.786,159.151 L578.571,164.914 L585.357,170.198 L592.143,175.043 L598.929,179.486 L605.714,183.561 L612.500,187.297 L619.286,190.723 L626.071,193.865 L632.857,196.746 L639.643,199.388 L646.429,201.811 L653.214,204.032 L660.000,206.070 L666.786,207.938 L673.571,209.651 L680.357,211.222 L687.143,212.662 L693.929,213.983 L700.714,215.195 L707.500,216.305 L714.286,217.324 L721.071,218.258 L727.857,219.115 L734.643,219.900 L741.429,220.620 L748.214,221.281 L755.000,221.887 L761.786,222.442 L768.571,222.951 L775.357,223.418 L782.143,223.847 L788.929,224.239 L795.714,224.599 L802.500,224.930 L809.286,225.233 L816.071,225.510 L822.857,225.765 L829.643,225.998 L836.429,226.213 L843.214,226.409 L850.000,226.589 L856.786,226.754 L863.571,226.906 L870.357,227.044 L877.143,227.172 L883.929,227.288 L890.714,227.396 L897.500,227.494 L904.286,227.584 L911.071,227.666 L917.857,227.742 L924.643,227.811 L931.429,227.875 L938.214,227.933 L945.000,227.987" class="trace total" />
+<circle cx="565.0" cy="152.86773794808406" r="2.618" class="sample total" />
+<circle cx="619.2857142857143" cy="190.72311495673674" r="2.618" class="sample total" />
+<circle cx="673.5714285714286" cy="209.65080346106305" r="2.618" class="sample total" />
+<circle cx="727.8571428571429" cy="219.11464771322622" r="2.618" class="sample total" />
+<circle cx="782.1428571428571" cy="223.84656983930782" r="2.618" class="sample total" />
+<circle cx="836.4285714285714" cy="226.2125309023486" r="2.618" class="sample total" />
+<circle cx="890.7142857142858" cy="227.395511433869" r="2.618" class="sample total" />
+<circle cx="945.0" cy="227.9870016996292" r="2.618" class="sample total" />
+</g>
+<circle cx="565.0" cy="152.86773794808406" r="5" class="sample total">
+<animate attributeName="cx" keyTimes="0.00000000;0.08000000;0.09071429;0.10142857;0.11214286;0.12285714;0.13357143;0.14428571;0.15500000;0.16571429;0.17642857;0.18714286;0.19785714;0.20857143;0.21928571;0.23000000;0.24071429;0.25142857;0.26214286;0.27285714;0.28357143;0.29428571;0.30500000;0.31571429;0.32642857;0.33714286;0.34785714;0.35857143;0.36928571;0.38000000;0.39071429;0.40142857;0.41214286;0.42285714;0.43357143;0.44428571;0.45500000;0.46571429;0.47642857;0.48714286;0.49785714;0.50857143;0.51928571;0.53000000;0.54071429;0.55142857;0.56214286;0.57285714;0.58357143;0.59428571;0.60500000;0.61571429;0.62642857;0.63714286;0.64785714;0.65857143;0.66928571;0.68000000;1.00000000" values="565.0;565.0;571.7857;578.5714;585.3571;592.1429;598.9286;605.7143;612.5;619.2857;626.0714;632.8571;639.6429;646.4286;653.2143;660.0;666.7857;673.5714;680.3571;687.1429;693.9286;700.7143;707.5;714.2857;721.0714;727.8571;734.6429;741.4286;748.2143;755.0;761.7857;768.5714;775.3571;782.1429;788.9286;795.7143;802.5;809.2857;816.0714;822.8571;829.6429;836.4286;843.2143;850.0;856.7857;863.5714;870.3571;877.1429;883.9286;890.7143;897.5;904.2857;911.0714;917.8571;924.6429;931.4286;938.2143;945.0;945.0" dur="8.472s" repeatCount="indefinite" calcMode="linear" />
+<animate attributeName="cy" keyTimes="0.00000000;0.08000000;0.09071429;0.10142857;0.11214286;0.12285714;0.13357143;0.14428571;0.15500000;0.16571429;0.17642857;0.18714286;0.19785714;0.20857143;0.21928571;0.23000000;0.24071429;0.25142857;0.26214286;0.27285714;0.28357143;0.29428571;0.30500000;0.31571429;0.32642857;0.33714286;0.34785714;0.35857143;0.36928571;0.38000000;0.39071429;0.40142857;0.41214286;0.42285714;0.43357143;0.44428571;0.45500000;0.46571429;0.47642857;0.48714286;0.49785714;0.50857143;0.51928571;0.53000000;0.54071429;0.55142857;0.56214286;0.57285714;0.58357143;0.59428571;0.60500000;0.61571429;0.62642857;0.63714286;0.64785714;0.65857143;0.66928571;0.68000000;1.00000000" values="152.8677;152.8677;159.1514;164.9136;170.1975;175.0429;179.4861;183.5606;187.2969;190.7231;193.865;196.746;199.388;201.8107;204.0323;206.0696;207.9377;209.6508;211.2217;212.6623;213.9832;215.1946;216.3054;217.324;218.2581;219.1146;219.9001;220.6204;221.2809;221.8865;222.4419;222.9513;223.4183;223.8466;224.2393;224.5994;224.9297;225.2325;225.5102;225.7649;225.9984;226.2125;226.4089;226.589;226.7541;226.9055;227.0444;227.1717;227.2884;227.3955;227.4937;227.5837;227.6663;227.742;227.8114;227.8751;227.9335;227.987;227.987" dur="8.472s" repeatCount="indefinite" calcMode="linear" />
+</circle>
+<g opacity="1"><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="107" font-size="23" class="fnn" text-anchor="middle">Gradient: 0.5</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="107" font-size="23" class="" text-anchor="middle">Gradient: 1.5</text></g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="630" font-size="22" class="fnn" text-anchor="middle">Update Size: 0.00500000</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="630" font-size="22" class="" text-anchor="middle">Update Size: 0.01500000</text></g><animate attributeName="opacity" keyTimes="0.00000000;0.16571429;1.00000000" values="1;0;0" dur="8.472s" repeatCount="indefinite" calcMode="discrete" /></g>
+<g opacity="0"><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="107" font-size="23" class="fnn" text-anchor="middle">Gradient: 0.25</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="107" font-size="23" class="" text-anchor="middle">Gradient: 1.25</text></g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="630" font-size="22" class="fnn" text-anchor="middle">Update Size: 0.00250000</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="630" font-size="22" class="" text-anchor="middle">Update Size: 0.01250000</text></g><animate attributeName="opacity" keyTimes="0.00000000;0.16571429;0.25142857;1.00000000" values="0;1;0;0" dur="8.472s" repeatCount="indefinite" calcMode="discrete" /></g>
+<g opacity="0"><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="107" font-size="23" class="fnn" text-anchor="middle">Gradient: 0.125</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="107" font-size="23" class="" text-anchor="middle">Gradient: 1.125</text></g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="630" font-size="22" class="fnn" text-anchor="middle">Update Size: 0.00125000</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="630" font-size="22" class="" text-anchor="middle">Update Size: 0.01125000</text></g><animate attributeName="opacity" keyTimes="0.00000000;0.25142857;0.33714286;1.00000000" values="0;1;0;0" dur="8.472s" repeatCount="indefinite" calcMode="discrete" /></g>
+<g opacity="0"><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="107" font-size="23" class="fnn" text-anchor="middle">Gradient: 0.0625</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="107" font-size="23" class="" text-anchor="middle">Gradient: 1.0625</text></g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="630" font-size="22" class="fnn" text-anchor="middle">Update Size: 0.00062500</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="630" font-size="22" class="" text-anchor="middle">Update Size: 0.01062500</text></g><animate attributeName="opacity" keyTimes="0.00000000;0.33714286;0.42285714;1.00000000" values="0;1;0;0" dur="8.472s" repeatCount="indefinite" calcMode="discrete" /></g>
+<g opacity="0"><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="107" font-size="23" class="fnn" text-anchor="middle">Gradient: 0.0312</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="107" font-size="23" class="" text-anchor="middle">Gradient: 1.0312</text></g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="630" font-size="22" class="fnn" text-anchor="middle">Update Size: 0.00031250</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="630" font-size="22" class="" text-anchor="middle">Update Size: 0.01031250</text></g><animate attributeName="opacity" keyTimes="0.00000000;0.42285714;0.50857143;1.00000000" values="0;1;0;0" dur="8.472s" repeatCount="indefinite" calcMode="discrete" /></g>
+<g opacity="0"><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="107" font-size="23" class="fnn" text-anchor="middle">Gradient: 0.0156</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="107" font-size="23" class="" text-anchor="middle">Gradient: 1.0156</text></g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="630" font-size="22" class="fnn" text-anchor="middle">Update Size: 0.00015625</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="630" font-size="22" class="" text-anchor="middle">Update Size: 0.01015625</text></g><animate attributeName="opacity" keyTimes="0.00000000;0.50857143;0.59428571;1.00000000" values="0;1;0;0" dur="8.472s" repeatCount="indefinite" calcMode="discrete" /></g>
+<g opacity="0"><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="107" font-size="23" class="fnn" text-anchor="middle">Gradient: 0.0078</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="107" font-size="23" class="" text-anchor="middle">Gradient: 1.0078</text></g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="630" font-size="22" class="fnn" text-anchor="middle">Update Size: 0.00007813</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="630" font-size="22" class="" text-anchor="middle">Update Size: 0.01007813</text></g><animate attributeName="opacity" keyTimes="0.00000000;0.59428571;0.68000000;1.00000000" values="0;1;0;0" dur="8.472s" repeatCount="indefinite" calcMode="discrete" /></g>
+<g opacity="0"><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="107" font-size="23" class="fnn" text-anchor="middle">Gradient: 0.0039</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="107" font-size="23" class="" text-anchor="middle">Gradient: 1.0039</text></g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="630" font-size="22" class="fnn" text-anchor="middle">Update Size: 0.00003906</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="630" font-size="22" class="" text-anchor="middle">Update Size: 0.01003906</text></g><animate attributeName="opacity" keyTimes="0.00000000;0.68000000;1.00000000" values="0;1;1" dur="8.472s" repeatCount="indefinite" calcMode="discrete" /></g>
+<path d="M565 436h24" class="trace identity" />
+<g class="svg-label" data-svg-label-kind="native"><text x="596" y="442" font-size="21" class="identity" text-anchor="start">Identity</text>
+</g><path d="M697 436h24" class="trace residual" />
+<g class="svg-label" data-svg-label-kind="native"><text x="728" y="442" font-size="21" class="residual" text-anchor="start">Residual</text>
+</g><path d="M832 436h24" class="trace total" />
+<g class="svg-label" data-svg-label-kind="native"><text x="863" y="442" font-size="21" class="total" text-anchor="start">Total</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="442" font-size="21" class="muted" text-anchor="middle">Local derivative: 0.5</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="500" y="479" font-size="23" class="" text-anchor="middle">Layers in the Branch, n</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="500" y="523" font-size="22" class="" text-anchor="middle">One SGD Update of an Earlier Weight (learning rate 0.01)</text>
+</g><path d="M80 560H460" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="80" y="594" font-size="19" class="muted" text-anchor="middle">0.98</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="460" y="594" font-size="19" class="muted" text-anchor="middle">1.00</text>
+</g><line x1="460" y1="560" x2="365.0" y2="560" class="trace fnn">
+<animate attributeName="x2" keyTimes="0.00000000;0.08000000;0.09071429;0.10142857;0.11214286;0.12285714;0.13357143;0.14428571;0.15500000;0.16571429;0.17642857;0.18714286;0.19785714;0.20857143;0.21928571;0.23000000;0.24071429;0.25142857;0.26214286;0.27285714;0.28357143;0.29428571;0.30500000;0.31571429;0.32642857;0.33714286;0.34785714;0.35857143;0.36928571;0.38000000;0.39071429;0.40142857;0.41214286;0.42285714;0.43357143;0.44428571;0.45500000;0.46571429;0.47642857;0.48714286;0.49785714;0.50857143;0.51928571;0.53000000;0.54071429;0.55142857;0.56214286;0.57285714;0.58357143;0.59428571;0.60500000;0.61571429;0.62642857;0.63714286;0.64785714;0.65857143;0.66928571;0.68000000;1.00000000" values="365.0;365.0;372.88461589555624;380.1148405508971;386.74498579312285;392.824855787278;398.40012115407706;403.5126620373708;408.2008826984003;412.5;416.4423079477781;420.0574202754486;423.3724928965614;426.412427893639;429.2000605770385;431.7563310186854;434.10044134920014;436.25;438.22115397388905;440.02871013772426;441.6862464482807;443.2062139468195;444.60003028851924;445.8781655093427;447.05022067460004;448.125;449.1105769869445;450.01435506886213;450.84312322414036;451.60310697340975;452.30001514425965;452.93908275467135;453.5251103373;454.0625;454.5552884934723;455.0071775344311;455.42156161207015;455.80155348670485;456.1500075721298;456.46954137733564;456.76255516865;457.03125;457.27764424673614;457.50358876721555;457.7107808060351;457.9007767433524;458.0750037860649;458.2347706886678;458.381277584325;458.515625;458.6388221233681;458.7517943836078;458.85539040301757;458.95038837167624;459.03750189303247;459.1173853443339;459.19063879216253;459.2578125;459.2578125" dur="8.472s" repeatCount="indefinite" calcMode="linear" />
+</line>
+<circle cx="460" cy="560" r="6" class="before" />
+<circle cx="365.0" cy="560" r="4" class="sample fnn">
+<animate attributeName="cx" keyTimes="0.00000000;0.08000000;0.09071429;0.10142857;0.11214286;0.12285714;0.13357143;0.14428571;0.15500000;0.16571429;0.17642857;0.18714286;0.19785714;0.20857143;0.21928571;0.23000000;0.24071429;0.25142857;0.26214286;0.27285714;0.28357143;0.29428571;0.30500000;0.31571429;0.32642857;0.33714286;0.34785714;0.35857143;0.36928571;0.38000000;0.39071429;0.40142857;0.41214286;0.42285714;0.43357143;0.44428571;0.45500000;0.46571429;0.47642857;0.48714286;0.49785714;0.50857143;0.51928571;0.53000000;0.54071429;0.55142857;0.56214286;0.57285714;0.58357143;0.59428571;0.60500000;0.61571429;0.62642857;0.63714286;0.64785714;0.65857143;0.66928571;0.68000000;1.00000000" values="365.0;365.0;372.88461589555624;380.1148405508971;386.74498579312285;392.824855787278;398.40012115407706;403.5126620373708;408.2008826984003;412.5;416.4423079477781;420.0574202754486;423.3724928965614;426.412427893639;429.2000605770385;431.7563310186854;434.10044134920014;436.25;438.22115397388905;440.02871013772426;441.6862464482807;443.2062139468195;444.60003028851924;445.8781655093427;447.05022067460004;448.125;449.1105769869445;450.01435506886213;450.84312322414036;451.60310697340975;452.30001514425965;452.93908275467135;453.5251103373;454.0625;454.5552884934723;455.0071775344311;455.42156161207015;455.80155348670485;456.1500075721298;456.46954137733564;456.76255516865;457.03125;457.27764424673614;457.50358876721555;457.7107808060351;457.9007767433524;458.0750037860649;458.2347706886678;458.381277584325;458.515625;458.6388221233681;458.7517943836078;458.85539040301757;458.95038837167624;459.03750189303247;459.1173853443339;459.19063879216253;459.2578125;459.2578125" dur="8.472s" repeatCount="indefinite" calcMode="linear" />
+</circle>
+<path d="M565 560H945" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="565" y="594" font-size="19" class="muted" text-anchor="middle">0.98</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="945" y="594" font-size="19" class="muted" text-anchor="middle">1.00</text>
+</g><path d="M945 560H755.0" class="trace identity update" />
+<line x1="755.0" y1="560" x2="660.0" y2="560" class="trace residual">
+<animate attributeName="x2" keyTimes="0.00000000;0.08000000;0.09071429;0.10142857;0.11214286;0.12285714;0.13357143;0.14428571;0.15500000;0.16571429;0.17642857;0.18714286;0.19785714;0.20857143;0.21928571;0.23000000;0.24071429;0.25142857;0.26214286;0.27285714;0.28357143;0.29428571;0.30500000;0.31571429;0.32642857;0.33714286;0.34785714;0.35857143;0.36928571;0.38000000;0.39071429;0.40142857;0.41214286;0.42285714;0.43357143;0.44428571;0.45500000;0.46571429;0.47642857;0.48714286;0.49785714;0.50857143;0.51928571;0.53000000;0.54071429;0.55142857;0.56214286;0.57285714;0.58357143;0.59428571;0.60500000;0.61571429;0.62642857;0.63714286;0.64785714;0.65857143;0.66928571;0.68000000;1.00000000" values="660.0;660.0;667.8846158955562;675.114840550897;681.7449857931229;687.824855787278;693.400121154077;698.5126620373708;703.2008826984003;707.5;711.4423079477781;715.0574202754485;718.3724928965614;721.412427893639;724.2000605770386;726.7563310186854;729.1004413492002;731.25;733.221153973889;735.0287101377243;736.6862464482807;738.2062139468195;739.6000302885193;740.8781655093427;742.0502206746;743.125;744.1105769869446;745.0143550688622;745.8431232241403;746.6031069734098;747.3000151442596;747.9390827546713;748.5251103373;749.0625;749.5552884934723;750.0071775344311;750.4215616120703;750.8015534867048;751.1500075721298;751.4695413773356;751.76255516865;752.03125;752.2776442467361;752.5035887672155;752.710780806035;752.9007767433525;753.0750037860649;753.2347706886678;753.3812775843251;753.515625;753.6388221233681;753.7517943836077;753.8553904030175;753.9503883716762;754.0375018930324;754.1173853443339;754.1906387921625;754.2578125;754.2578125" dur="8.472s" repeatCount="indefinite" calcMode="linear" />
+</line>
+<circle cx="945" cy="560" r="6" class="before" />
+<circle cx="660.0" cy="560" r="4" class="sample total">
+<animate attributeName="cx" keyTimes="0.00000000;0.08000000;0.09071429;0.10142857;0.11214286;0.12285714;0.13357143;0.14428571;0.15500000;0.16571429;0.17642857;0.18714286;0.19785714;0.20857143;0.21928571;0.23000000;0.24071429;0.25142857;0.26214286;0.27285714;0.28357143;0.29428571;0.30500000;0.31571429;0.32642857;0.33714286;0.34785714;0.35857143;0.36928571;0.38000000;0.39071429;0.40142857;0.41214286;0.42285714;0.43357143;0.44428571;0.45500000;0.46571429;0.47642857;0.48714286;0.49785714;0.50857143;0.51928571;0.53000000;0.54071429;0.55142857;0.56214286;0.57285714;0.58357143;0.59428571;0.60500000;0.61571429;0.62642857;0.63714286;0.64785714;0.65857143;0.66928571;0.68000000;1.00000000" values="660.0;660.0;667.8846158955562;675.114840550897;681.7449857931229;687.824855787278;693.400121154077;698.5126620373708;703.2008826984003;707.5;711.4423079477781;715.0574202754485;718.3724928965614;721.412427893639;724.2000605770386;726.7563310186854;729.1004413492002;731.25;733.221153973889;735.0287101377243;736.6862464482807;738.2062139468195;739.6000302885193;740.8781655093427;742.0502206746;743.125;744.1105769869446;745.0143550688622;745.8431232241403;746.6031069734098;747.3000151442596;747.9390827546713;748.5251103373;749.0625;749.5552884934723;750.0071775344311;750.4215616120703;750.8015534867048;751.1500075721298;751.4695413773356;751.76255516865;752.03125;752.2776442467361;752.5035887672155;752.710780806035;752.9007767433525;753.0750037860649;753.2347706886678;753.3812775843251;753.515625;753.6388221233681;753.7517943836077;753.8553904030175;753.9503883716762;754.0375018930324;754.1173853443339;754.1906387921625;754.2578125;754.2578125" dur="8.472s" repeatCount="indefinite" calcMode="linear" />
+</circle>
+</g>
+</g>
+<g class="animation-static">
+<g>
+<g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="35" font-size="31" class="fnn" text-anchor="middle">FNN</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="35" font-size="31" class="" text-anchor="middle">ResNet</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="71" font-size="25" text-anchor="middle">y = <tspan class="fnn">(0.5)<tspan baseline-shift="super" font-size="16">n</tspan><tspan baseline-shift="baseline"> X</tspan></tspan></text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="71" font-size="25" text-anchor="middle">y = <tspan class="identity">X</tspan> + <tspan class="residual">(0.5)<tspan baseline-shift="super" font-size="16">n</tspan><tspan baseline-shift="baseline"> X</tspan></tspan></text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="22" y="258" font-size="22" class="muted" text-anchor="middle" transform="rotate(-90 22 258)">Input Gradient</text>
+</g><path d="M80 380.0H460" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="68" y="386.0" font-size="19" class="muted" text-anchor="end">0</text>
+</g><path d="M80 304.2892459826947H460" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="68" y="310.2892459826947" font-size="19" class="muted" text-anchor="end">0.5</text>
+</g><path d="M80 228.5784919653894H460" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="68" y="234.5784919653894" font-size="19" class="muted" text-anchor="end">1</text>
+</g><path d="M80 152.86773794808406H460" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="68" y="158.86773794808406" font-size="19" class="muted" text-anchor="end">1.5</text>
+</g><path d="M80 135V380H460" class="axis" />
+<path d="M80.0 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="80.0" y="406" font-size="20" class="muted" text-anchor="middle">1</text>
+</g><path d="M134.28571428571428 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="134.28571428571428" y="406" font-size="20" class="muted" text-anchor="middle">2</text>
+</g><path d="M188.57142857142856 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="188.57142857142856" y="406" font-size="20" class="muted" text-anchor="middle">3</text>
+</g><path d="M242.85714285714286 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="242.85714285714286" y="406" font-size="20" class="muted" text-anchor="middle">4</text>
+</g><path d="M297.1428571428571 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="297.1428571428571" y="406" font-size="20" class="muted" text-anchor="middle">5</text>
+</g><path d="M351.42857142857144 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="351.42857142857144" y="406" font-size="20" class="muted" text-anchor="middle">6</text>
+</g><path d="M405.7142857142857 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="405.7142857142857" y="406" font-size="20" class="muted" text-anchor="middle">7</text>
+</g><path d="M460.0 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="460.0" y="406" font-size="20" class="muted" text-anchor="middle">8</text>
+</g><path d="M565 380.0H945" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="553" y="386.0" font-size="19" class="muted" text-anchor="end">0</text>
+</g><path d="M565 304.2892459826947H945" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="553" y="310.2892459826947" font-size="19" class="muted" text-anchor="end">0.5</text>
+</g><path d="M565 228.5784919653894H945" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="553" y="234.5784919653894" font-size="19" class="muted" text-anchor="end">1</text>
+</g><path d="M565 152.86773794808406H945" class="grid" />
+<g class="svg-label" data-svg-label-kind="native"><text x="553" y="158.86773794808406" font-size="19" class="muted" text-anchor="end">1.5</text>
+</g><path d="M565 135V380H945" class="axis" />
+<path d="M565.0 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="565.0" y="406" font-size="20" class="muted" text-anchor="middle">1</text>
+</g><path d="M619.2857142857143 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="619.2857142857143" y="406" font-size="20" class="muted" text-anchor="middle">2</text>
+</g><path d="M673.5714285714286 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="673.5714285714286" y="406" font-size="20" class="muted" text-anchor="middle">3</text>
+</g><path d="M727.8571428571429 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="727.8571428571429" y="406" font-size="20" class="muted" text-anchor="middle">4</text>
+</g><path d="M782.1428571428571 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="782.1428571428571" y="406" font-size="20" class="muted" text-anchor="middle">5</text>
+</g><path d="M836.4285714285714 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="836.4285714285714" y="406" font-size="20" class="muted" text-anchor="middle">6</text>
+</g><path d="M890.7142857142858 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="890.7142857142858" y="406" font-size="20" class="muted" text-anchor="middle">7</text>
+</g><path d="M945.0 380v5" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="945.0" y="406" font-size="20" class="muted" text-anchor="middle">8</text>
+</g><path d="M565 228.5784919653894H945" class="trace identity" />
+<path d="M80.000,304.289 L86.786,310.573 L93.571,316.335 L100.357,321.619 L107.143,326.464 L113.929,330.908 L120.714,334.982 L127.500,338.718 L134.286,342.145 L141.071,345.286 L147.857,348.168 L154.643,350.810 L161.429,353.232 L168.214,355.454 L175.000,357.491 L181.786,359.359 L188.571,361.072 L195.357,362.643 L202.143,364.084 L208.929,365.405 L215.714,366.616 L222.500,367.727 L229.286,368.746 L236.071,369.680 L242.857,370.536 L249.643,371.322 L256.429,372.042 L263.214,372.702 L270.000,373.308 L276.786,373.863 L283.571,374.373 L290.357,374.840 L297.143,375.268 L303.929,375.661 L310.714,376.021 L317.500,376.351 L324.286,376.654 L331.071,376.932 L337.857,377.186 L344.643,377.420 L351.429,377.634 L358.214,377.830 L365.000,378.010 L371.786,378.176 L378.571,378.327 L385.357,378.466 L392.143,378.593 L398.929,378.710 L405.714,378.817 L412.500,378.915 L419.286,379.005 L426.071,379.088 L432.857,379.164 L439.643,379.233 L446.429,379.297 L453.214,379.355 L460.000,379.409" class="trace fnn guide" />
+<g>
+<path d="M80.000,304.289 L86.786,310.573 L93.571,316.335 L100.357,321.619 L107.143,326.464 L113.929,330.908 L120.714,334.982 L127.500,338.718 L134.286,342.145 L141.071,345.286 L147.857,348.168 L154.643,350.810 L161.429,353.232 L168.214,355.454 L175.000,357.491 L181.786,359.359 L188.571,361.072 L195.357,362.643 L202.143,364.084 L208.929,365.405 L215.714,366.616 L222.500,367.727 L229.286,368.746 L236.071,369.680 L242.857,370.536 L249.643,371.322 L256.429,372.042 L263.214,372.702 L270.000,373.308 L276.786,373.863 L283.571,374.373 L290.357,374.840 L297.143,375.268 L303.929,375.661 L310.714,376.021 L317.500,376.351 L324.286,376.654 L331.071,376.932 L337.857,377.186 L344.643,377.420 L351.429,377.634 L358.214,377.830 L365.000,378.010 L371.786,378.176 L378.571,378.327 L385.357,378.466 L392.143,378.593 L398.929,378.710 L405.714,378.817 L412.500,378.915 L419.286,379.005 L426.071,379.088 L432.857,379.164 L439.643,379.233 L446.429,379.297 L453.214,379.355 L460.000,379.409" class="trace fnn" />
+<circle cx="80.0" cy="304.2892459826947" r="2.618" class="sample fnn" />
+<circle cx="134.28571428571428" cy="342.1446229913473" r="2.618" class="sample fnn" />
+<circle cx="188.57142857142856" cy="361.07231149567366" r="2.618" class="sample fnn" />
+<circle cx="242.85714285714286" cy="370.53615574783686" r="2.618" class="sample fnn" />
+<circle cx="297.1428571428571" cy="375.2680778739184" r="2.618" class="sample fnn" />
+<circle cx="351.42857142857144" cy="377.6340389369592" r="2.618" class="sample fnn" />
+<circle cx="405.7142857142857" cy="378.8170194684796" r="2.618" class="sample fnn" />
+<circle cx="460.0" cy="379.40850973423983" r="2.618" class="sample fnn" />
+</g>
+<circle cx="460.0" cy="379.40850973423983" r="5" class="sample fnn">
+</circle>
+<path d="M565.000,304.289 L571.786,310.573 L578.571,316.335 L585.357,321.619 L592.143,326.464 L598.929,330.908 L605.714,334.982 L612.500,338.718 L619.286,342.145 L626.071,345.286 L632.857,348.168 L639.643,350.810 L646.429,353.232 L653.214,355.454 L660.000,357.491 L666.786,359.359 L673.571,361.072 L680.357,362.643 L687.143,364.084 L693.929,365.405 L700.714,366.616 L707.500,367.727 L714.286,368.746 L721.071,369.680 L727.857,370.536 L734.643,371.322 L741.429,372.042 L748.214,372.702 L755.000,373.308 L761.786,373.863 L768.571,374.373 L775.357,374.840 L782.143,375.268 L788.929,375.661 L795.714,376.021 L802.500,376.351 L809.286,376.654 L816.071,376.932 L822.857,377.186 L829.643,377.420 L836.429,377.634 L843.214,377.830 L850.000,378.010 L856.786,378.176 L863.571,378.327 L870.357,378.466 L877.143,378.593 L883.929,378.710 L890.714,378.817 L897.500,378.915 L904.286,379.005 L911.071,379.088 L917.857,379.164 L924.643,379.233 L931.429,379.297 L938.214,379.355 L945.000,379.409" class="trace residual guide" />
+<g>
+<path d="M565.000,304.289 L571.786,310.573 L578.571,316.335 L585.357,321.619 L592.143,326.464 L598.929,330.908 L605.714,334.982 L612.500,338.718 L619.286,342.145 L626.071,345.286 L632.857,348.168 L639.643,350.810 L646.429,353.232 L653.214,355.454 L660.000,357.491 L666.786,359.359 L673.571,361.072 L680.357,362.643 L687.143,364.084 L693.929,365.405 L700.714,366.616 L707.500,367.727 L714.286,368.746 L721.071,369.680 L727.857,370.536 L734.643,371.322 L741.429,372.042 L748.214,372.702 L755.000,373.308 L761.786,373.863 L768.571,374.373 L775.357,374.840 L782.143,375.268 L788.929,375.661 L795.714,376.021 L802.500,376.351 L809.286,376.654 L816.071,376.932 L822.857,377.186 L829.643,377.420 L836.429,377.634 L843.214,377.830 L850.000,378.010 L856.786,378.176 L863.571,378.327 L870.357,378.466 L877.143,378.593 L883.929,378.710 L890.714,378.817 L897.500,378.915 L904.286,379.005 L911.071,379.088 L917.857,379.164 L924.643,379.233 L931.429,379.297 L938.214,379.355 L945.000,379.409" class="trace residual" />
+<circle cx="565.0" cy="304.2892459826947" r="2.618" class="sample residual" />
+<circle cx="619.2857142857143" cy="342.1446229913473" r="2.618" class="sample residual" />
+<circle cx="673.5714285714286" cy="361.07231149567366" r="2.618" class="sample residual" />
+<circle cx="727.8571428571429" cy="370.53615574783686" r="2.618" class="sample residual" />
+<circle cx="782.1428571428571" cy="375.2680778739184" r="2.618" class="sample residual" />
+<circle cx="836.4285714285714" cy="377.6340389369592" r="2.618" class="sample residual" />
+<circle cx="890.7142857142858" cy="378.8170194684796" r="2.618" class="sample residual" />
+<circle cx="945.0" cy="379.40850973423983" r="2.618" class="sample residual" />
+</g>
+<circle cx="945.0" cy="379.40850973423983" r="5" class="sample residual">
+</circle>
+<path d="M565.000,152.868 L571.786,159.151 L578.571,164.914 L585.357,170.198 L592.143,175.043 L598.929,179.486 L605.714,183.561 L612.500,187.297 L619.286,190.723 L626.071,193.865 L632.857,196.746 L639.643,199.388 L646.429,201.811 L653.214,204.032 L660.000,206.070 L666.786,207.938 L673.571,209.651 L680.357,211.222 L687.143,212.662 L693.929,213.983 L700.714,215.195 L707.500,216.305 L714.286,217.324 L721.071,218.258 L727.857,219.115 L734.643,219.900 L741.429,220.620 L748.214,221.281 L755.000,221.887 L761.786,222.442 L768.571,222.951 L775.357,223.418 L782.143,223.847 L788.929,224.239 L795.714,224.599 L802.500,224.930 L809.286,225.233 L816.071,225.510 L822.857,225.765 L829.643,225.998 L836.429,226.213 L843.214,226.409 L850.000,226.589 L856.786,226.754 L863.571,226.906 L870.357,227.044 L877.143,227.172 L883.929,227.288 L890.714,227.396 L897.500,227.494 L904.286,227.584 L911.071,227.666 L917.857,227.742 L924.643,227.811 L931.429,227.875 L938.214,227.933 L945.000,227.987" class="trace total guide" />
+<g>
+<path d="M565.000,152.868 L571.786,159.151 L578.571,164.914 L585.357,170.198 L592.143,175.043 L598.929,179.486 L605.714,183.561 L612.500,187.297 L619.286,190.723 L626.071,193.865 L632.857,196.746 L639.643,199.388 L646.429,201.811 L653.214,204.032 L660.000,206.070 L666.786,207.938 L673.571,209.651 L680.357,211.222 L687.143,212.662 L693.929,213.983 L700.714,215.195 L707.500,216.305 L714.286,217.324 L721.071,218.258 L727.857,219.115 L734.643,219.900 L741.429,220.620 L748.214,221.281 L755.000,221.887 L761.786,222.442 L768.571,222.951 L775.357,223.418 L782.143,223.847 L788.929,224.239 L795.714,224.599 L802.500,224.930 L809.286,225.233 L816.071,225.510 L822.857,225.765 L829.643,225.998 L836.429,226.213 L843.214,226.409 L850.000,226.589 L856.786,226.754 L863.571,226.906 L870.357,227.044 L877.143,227.172 L883.929,227.288 L890.714,227.396 L897.500,227.494 L904.286,227.584 L911.071,227.666 L917.857,227.742 L924.643,227.811 L931.429,227.875 L938.214,227.933 L945.000,227.987" class="trace total" />
+<circle cx="565.0" cy="152.86773794808406" r="2.618" class="sample total" />
+<circle cx="619.2857142857143" cy="190.72311495673674" r="2.618" class="sample total" />
+<circle cx="673.5714285714286" cy="209.65080346106305" r="2.618" class="sample total" />
+<circle cx="727.8571428571429" cy="219.11464771322622" r="2.618" class="sample total" />
+<circle cx="782.1428571428571" cy="223.84656983930782" r="2.618" class="sample total" />
+<circle cx="836.4285714285714" cy="226.2125309023486" r="2.618" class="sample total" />
+<circle cx="890.7142857142858" cy="227.395511433869" r="2.618" class="sample total" />
+<circle cx="945.0" cy="227.9870016996292" r="2.618" class="sample total" />
+</g>
+<circle cx="945.0" cy="227.9870016996292" r="5" class="sample total">
+</circle>
+<g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="107" font-size="23" class="fnn" text-anchor="middle">Gradient: 0.0039</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="107" font-size="23" class="" text-anchor="middle">Gradient: 1.0039</text></g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="630" font-size="22" class="fnn" text-anchor="middle">Update Size: 0.00003906</text></g><g class="svg-label" data-svg-label-kind="native"><text x="755.0" y="630" font-size="22" class="" text-anchor="middle">Update Size: 0.01003906</text>
+</g><path d="M565 436h24" class="trace identity" />
+<g class="svg-label" data-svg-label-kind="native"><text x="596" y="442" font-size="21" class="identity" text-anchor="start">Identity</text>
+</g><path d="M697 436h24" class="trace residual" />
+<g class="svg-label" data-svg-label-kind="native"><text x="728" y="442" font-size="21" class="residual" text-anchor="start">Residual</text>
+</g><path d="M832 436h24" class="trace total" />
+<g class="svg-label" data-svg-label-kind="native"><text x="863" y="442" font-size="21" class="total" text-anchor="start">Total</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="270.0" y="442" font-size="21" class="muted" text-anchor="middle">Local derivative: 0.5</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="500" y="479" font-size="23" class="" text-anchor="middle">Layers in the Branch, n</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="500" y="523" font-size="22" class="" text-anchor="middle">One SGD Update of an Earlier Weight (learning rate 0.01)</text>
+</g><path d="M80 560H460" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="80" y="594" font-size="19" class="muted" text-anchor="middle">0.98</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="460" y="594" font-size="19" class="muted" text-anchor="middle">1.00</text>
+</g><line x1="460" y1="560" x2="459.2578125" y2="560" class="trace fnn">
+</line>
+<circle cx="460" cy="560" r="6" class="before" />
+<circle cx="459.2578125" cy="560" r="4" class="sample fnn">
+</circle>
+<path d="M565 560H945" class="axis" />
+<g class="svg-label" data-svg-label-kind="native"><text x="565" y="594" font-size="19" class="muted" text-anchor="middle">0.98</text>
+</g><g class="svg-label" data-svg-label-kind="native"><text x="945" y="594" font-size="19" class="muted" text-anchor="middle">1.00</text>
+</g><path d="M945 560H755.0" class="trace identity update" />
+<line x1="755.0" y1="560" x2="754.2578125" y2="560" class="trace residual">
+</line>
+<circle cx="945" cy="560" r="6" class="before" />
+<circle cx="754.2578125" cy="560" r="4" class="sample total">
+</circle>
+</g>
+</g>
+</svg>

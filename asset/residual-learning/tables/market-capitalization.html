@@ -1,0 +1,167 @@
+<table class="evidence-table" id="table-SizeExclusionRobustness" aria-label="Market Capitalization Exclusion Tests">
+  <thead>
+    <tr>
+      <th scope="col">Universe</th>
+      <th scope="col">Depth</th>
+      <th scope="col">\(\Delta\) SR</th>
+      <th scope="col">ResNet SR</th>
+      <th scope="col">NN SR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="rowgroup" rowspan="3">All Stocks</th>
+      <td>Shallow</td>
+      <td>0.01</td>
+      <td>0.95</td>
+      <td>0.94</td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>0.05</td>
+      <td>0.95</td>
+      <td>0.90</td>
+    </tr>
+    <tr>
+      <td>Deep</td>
+      <td>0.10</td>
+      <td>0.92</td>
+      <td>0.82</td>
+    </tr>
+    <tr>
+      <th scope="rowgroup" rowspan="3">Exclude Smallest 20%</th>
+      <td>Shallow</td>
+      <td>0.00</td>
+      <td>0.89</td>
+      <td>0.88</td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>0.04</td>
+      <td>0.89</td>
+      <td>0.85</td>
+    </tr>
+    <tr>
+      <td>Deep</td>
+      <td>0.07</td>
+      <td>0.88</td>
+      <td>0.80</td>
+    </tr>
+    <tr>
+      <th scope="rowgroup" rowspan="3">Exclude Largest 20%</th>
+      <td>Shallow</td>
+      <td>
+        0.04
+        <sup>**</sup>
+      </td>
+      <td>1.44</td>
+      <td>1.41</td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>
+        0.09
+        <sup>**</sup>
+      </td>
+      <td>1.45</td>
+      <td>1.37</td>
+    </tr>
+    <tr>
+      <td>Deep</td>
+      <td>
+        0.14
+        <sup>*</sup>
+      </td>
+      <td>1.43</td>
+      <td>1.28</td>
+    </tr>
+    <tr>
+      <th scope="col">Universe</th>
+      <th scope="col">Depth</th>
+      <th scope="col">\(\Delta\) SR</th>
+      <th scope="col">ResNet+ SR</th>
+      <th scope="col">NN+ SR</th>
+    </tr>
+    <tr>
+      <th scope="rowgroup" rowspan="3">All Stocks</th>
+      <td>Shallow</td>
+      <td>0.09</td>
+      <td>1.92</td>
+      <td>1.84</td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>
+        0.47
+        <sup>***</sup>
+      </td>
+      <td>1.94</td>
+      <td>1.47</td>
+    </tr>
+    <tr>
+      <td>Deep</td>
+      <td>
+        1.18
+        <sup>***</sup>
+      </td>
+      <td>2.07</td>
+      <td>0.89</td>
+    </tr>
+    <tr>
+      <th scope="rowgroup" rowspan="3">Exclude Smallest 20%</th>
+      <td>Shallow</td>
+      <td>
+        0.09
+        <sup>*</sup>
+      </td>
+      <td>1.74</td>
+      <td>1.65</td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>
+        0.50
+        <sup>***</sup>
+      </td>
+      <td>1.76</td>
+      <td>1.27</td>
+    </tr>
+    <tr>
+      <td>Deep</td>
+      <td>
+        1.08
+        <sup>***</sup>
+      </td>
+      <td>1.87</td>
+      <td>0.79</td>
+    </tr>
+    <tr>
+      <th scope="rowgroup" rowspan="3">Exclude Largest 20%</th>
+      <td>Shallow</td>
+      <td>
+        0.20
+        <sup>**</sup>
+      </td>
+      <td>2.46</td>
+      <td>2.26</td>
+    </tr>
+    <tr>
+      <td>Medium</td>
+      <td>
+        0.70
+        <sup>***</sup>
+      </td>
+      <td>2.51</td>
+      <td>1.81</td>
+    </tr>
+    <tr>
+      <td>Deep</td>
+      <td>
+        1.67
+        <sup>***</sup>
+      </td>
+      <td>2.78</td>
+      <td>1.12</td>
+    </tr>
+  </tbody>
+</table>
